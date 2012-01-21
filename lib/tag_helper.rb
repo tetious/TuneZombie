@@ -30,7 +30,7 @@ class TagM4a
 
   def save_art_to_path(path)
     if @tag.COVR.nil?
-      nil
+      return nil
     else
       header = @tag.COVR[0..10]
       case
@@ -39,7 +39,7 @@ class TagM4a
         when header.include?('PNG')
           path += '.png'
         else
-          nil
+          return nil
       end
     end
 
@@ -48,9 +48,7 @@ class TagM4a
     fil.close
 
     path
-
   end
-
 end
 
 class TagMp3
@@ -60,12 +58,31 @@ class TagMp3
   end
 
   def load
-
+    @tag = TagLib::MPEG::File.new(@filename)
     self
   end
 
   def save_art_to_path(path)
+    if @tag.id3v2_tag.frame_list('APIC').first.nil?
+      return nil
+    else
+      apic = @tag.id3v2_tag.frame_list('APIC').first
 
+      case apic.mime_type
+        when 'image/jpg'
+          path += '.jpg'
+        when 'image/png'
+          path += '.png'
+        else
+          return nil
+      end
+    end
+
+    fil = File.open(path, "wb")
+    fil.write(apic.picture)
+    fil.close
+
+    path
   end
 
 end
