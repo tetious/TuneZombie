@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121025413) do
+ActiveRecord::Schema.define(:version => 20120121033607) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20120121025413) do
   end
 
   create_table "tracks", :force => true do |t|
-    t.string   "type"
+    t.string   "track_type"
     t.integer  "size"
     t.string   "file_url"
     t.string   "name"

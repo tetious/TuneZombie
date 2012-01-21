@@ -4,13 +4,12 @@ class TrackMetadata < ActiveRecord::Base
 
   def TrackMetadata.find_or_create_by_user_and_track(user, track)
 
-    tm = TrackMetadata.find(user: user, track: track)
-    if tm.nil?
-      tm = TrackMetadata.create
-      tm.user = user
-      tm.track = track
+    tm = TrackMetadata.where(user_id: user, track_id: track)
+    if tm.empty?
+      tm = TrackMetadata.create(user: user, track: track)
+    else
+      tm.first
     end
-    tm
   end
 
   validates :user_id, :track_id, :presence => true
