@@ -6,6 +6,10 @@
 
 # Ignore bundler config
 /.bundle
+/.rspec
+
+# ignore idea
+.idea/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
