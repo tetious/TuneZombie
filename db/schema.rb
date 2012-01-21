@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120135649) do
+ActiveRecord::Schema.define(:version => 20120121025413) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -32,25 +32,46 @@ ActiveRecord::Schema.define(:version => 20120120135649) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "track_metadata", :force => true do |t|
+    t.integer  "track_id"
+    t.integer  "user_id"
+    t.integer  "play_count"
+    t.integer  "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "track_plays", :force => true do |t|
     t.datetime "played_at"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "track_id"
+    t.integer  "user_id"
   end
 
   create_table "tracks", :force => true do |t|
     t.string   "type"
     t.integer  "size"
-    t.integer  "play_count"
     t.string   "file_url"
     t.string   "name"
     t.integer  "number"
     t.integer  "disc"
     t.datetime "date"
     t.text     "comments"
-    t.integer  "rating"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "artist_id"
+    t.integer  "album_id"
+    t.integer  "genre_id"
+    t.integer  "composer_id"
+    t.datetime "date_added"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

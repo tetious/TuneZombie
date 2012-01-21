@@ -1,4 +1,12 @@
 TuneZombie::Application.routes.draw do
+  resources :genres
+
+  resources :artists
+
+  resources :albums
+
+  resources :tracks
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

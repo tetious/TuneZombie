@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Major Version</key><integer>1</integer>
+	<key>Minor Version</key><integer>1</integer>
+	<key>Date</key><date>2012-01-20T14:46:54Z</date>
+	<key>Application Version</key><string>10.5.2</string>
+	<key>Features</key><integer>5</integer>
+	<key>Show Content Ratings</key><true/>
+	<key>Music Folder</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/</string>
+	<key>Library Persistent ID</key><string>F8FD4F094B281CFF</string>
+	<key>Tracks</key>
+	<dict>
+		<key>4642</key>
+		<dict>
+			<key>Track ID</key><integer>4642</integer>
+			<key>Name</key><string>Black Sun</string>
+			<key>Artist</key><string>Michiru Yamane, Takashi Yoshida, Soshiro Hokkai</string>
+			<key>Album</key><string>Castlevania Aria of Sorrow</string>
+			<key>Genre</key><string>Game Score</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>438272</integer>
+			<key>Total Time</key><integer>25965</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Year</key><integer>2003</integer>
+			<key>Date Modified</key><date>2007-07-11T02:00:03Z</date>
+			<key>Date Added</key><date>2006-10-12T18:16:55Z</date>
+			<key>Bit Rate</key><integer>134</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>Adjusted by iVolume 07/10/2007 21:00:03
+</string>
+			<key>Play Count</key><integer>1</integer>
+			<key>Play Date</key><integer>3244478513</integer>
+			<key>Play Date UTC</key><date>2006-10-24T01:01:53Z</date>
+			<key>Persistent ID</key><string>C80FF11D7570E563</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/Music/Michiru%20Yamane,%20Takashi%20Yoshida,%20Soshiro%20Hokkai/Castlevania%20Aria%20of%20Sorrow/01%20Black%20Sun.mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+		<key>4644</key>
+		<dict>
+			<key>Track ID</key><integer>4644</integer>
+			<key>Name</key><string>J'y suis jamais allé</string>
+			<key>Artist</key><string>Yann Tiersen</string>
+			<key>Album</key><string>Amelie</string>
+			<key>Genre</key><string>Soundtrack</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>2288061</integer>
+			<key>Total Time</key><integer>94537</integer>
+			<key>Track Number</key><integer>1</integer>
+			<key>Year</key><integer>2001</integer>
+			<key>Date Modified</key><date>2007-07-11T01:58:43Z</date>
+			<key>Date Added</key><date>2006-10-12T18:16:55Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>Adjusted by iVolume 07/10/2007 20:58:43
+</string>
+			<key>Play Count</key><integer>10</integer>
+			<key>Play Date</key><integer>3340967551</integer>
+			<key>Play Date UTC</key><date>2009-11-13T19:32:31Z</date>
+			<key>Album Rating</key><integer>80</integer>
+			<key>Album Rating Computed</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>C80FF11D7570E589</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/Music/Yann%20Tiersen/Amelie/01%20J'y%20suis%20jamais%20alle%CC%81.mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+		<key>4646</key>
+		<dict>
+			<key>Track ID</key><integer>4646</integer>
+			<key>Name</key><string>Les jours tristes (instrumental)</string>
+			<key>Artist</key><string>Yann Tiersen</string>
+			<key>Album</key><string>Amelie</string>
+			<key>Genre</key><string>Soundtrack</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>4424230</integer>
+			<key>Total Time</key><integer>183536</integer>
+			<key>Track Number</key><integer>2</integer>
+			<key>Year</key><integer>2001</integer>
+			<key>Date Modified</key><date>2007-07-11T02:10:06Z</date>
+			<key>Date Added</key><date>2006-10-12T18:16:55Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>Adjusted by iVolume 07/10/2007 21:10:06
+</string>
+			<key>Play Count</key><integer>10</integer>
+			<key>Play Date</key><integer>3340827360</integer>
+			<key>Play Date UTC</key><date>2009-11-12T04:36:00Z</date>
+			<key>Album Rating</key><integer>80</integer>
+			<key>Album Rating Computed</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>C80FF11D7570E58C</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/Music/Yann%20Tiersen/Amelie/02%20Les%20jours%20tristes%20(instrumental).mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+		<key>4648</key>
+		<dict>
+			<key>Track ID</key><integer>4648</integer>
+			<key>Name</key><string>La valse d'Amélie</string>
+			<key>Artist</key><string>Yann Tiersen</string>
+			<key>Album</key><string>Amelie</string>
+			<key>Genre</key><string>Soundtrack</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>3283010</integer>
+			<key>Total Time</key><integer>135993</integer>
+			<key>Track Number</key><integer>3</integer>
+			<key>Year</key><integer>2001</integer>
+			<key>Date Modified</key><date>2007-07-11T02:19:02Z</date>
+			<key>Date Added</key><date>2006-10-12T18:16:55Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>Adjusted by iVolume 07/10/2007 21:19:02
+</string>
+			<key>Play Count</key><integer>13</integer>
+			<key>Play Date</key><integer>3362681544</integer>
+			<key>Play Date UTC</key><date>2010-07-23T03:12:24Z</date>
+			<key>Rating</key><integer>80</integer>
+			<key>Album Rating</key><integer>80</integer>
+			<key>Album Rating Computed</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>C80FF11D7570E58E</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/Music/Yann%20Tiersen/Amelie/03%20La%20valse%20d'Ame%CC%81lie.mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+		<key>4650</key>
+		<dict>
+			<key>Track ID</key><integer>4650</integer>
+			<key>Name</key><string>Comptine d'Un Autre Été</string>
+			<key>Artist</key><string>Yann Tiersen</string>
+			<key>Album</key><string>Amelie</string>
+			<key>Genre</key><string>Soundtrack</string>
+			<key>Kind</key><string>MPEG audio file</string>
+			<key>Size</key><integer>3398373</integer>
+			<key>Total Time</key><integer>140800</integer>
+			<key>Track Number</key><integer>4</integer>
+			<key>Year</key><integer>2001</integer>
+			<key>Date Modified</key><date>2007-07-11T02:30:02Z</date>
+			<key>Date Added</key><date>2006-10-12T18:16:55Z</date>
+			<key>Bit Rate</key><integer>192</integer>
+			<key>Sample Rate</key><integer>44100</integer>
+			<key>Comments</key><string>Adjusted by iVolume 07/10/2007 21:30:02
+</string>
+			<key>Play Count</key><integer>12</integer>
+			<key>Play Date</key><integer>3362681685</integer>
+			<key>Play Date UTC</key><date>2010-07-23T03:14:45Z</date>
+			<key>Skip Count</key><integer>1</integer>
+			<key>Skip Date</key><date>2010-06-02T22:57:46Z</date>
+			<key>Rating</key><integer>80</integer>
+			<key>Album Rating</key><integer>80</integer>
+			<key>Album Rating Computed</key><true/>
+			<key>Artwork Count</key><integer>1</integer>
+			<key>Persistent ID</key><string>C80FF11D7570E590</string>
+			<key>Track Type</key><string>File</string>
+			<key>Location</key><string>file://localhost/Volumes/Big/iTunes/iTunes%20Music/Music/Yann%20Tiersen/Amelie/04%20Comptine%20d'Un%20Autre%20E%CC%81te%CC%81.mp3</string>
+			<key>File Folder Count</key><integer>5</integer>
+			<key>Library Folder Count</key><integer>1</integer>
+		</dict>
+	</dict>
+</dict>
