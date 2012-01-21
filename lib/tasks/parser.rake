@@ -79,11 +79,11 @@ class Crawler
 
   def add_track_with_data(fil, track)
     dbt = Track.find_or_create_by_file_url fil
-    existing_track = dbt.id?
+    new_track = dbt.new_record?
 
     dbt.comments = track[:comments]
     dbt.date_added = track[:date_added]
-    dbt.disc = track[:disc_number].to_i
+    dbt.disc = track[:disc_number]
     dbt.file_url = fil
     dbt.name = track[:name]
     dbt.number = track[:track_number]
@@ -93,20 +93,21 @@ class Crawler
 
     tm = TrackMetadata.find_or_create_by_user_and_track(@user, dbt)
 
-    tm.play_count = track[:play_count].nil? ? 0 : track[:play_count]
-    tm.rating = track[:rating].nil? ? 0 : track[:rating].to_i / 20
+    tm.play_count = track[:play_count] || 0
+    tm.rating = (track[:rating].to_i || 0) / 20
+    tm.skip_count = track[:skip_count] || 0
     tm.save
 
     # add plays records
-    if existing_track
-      puts("Track already present, skipping track_plays gen.")
-    else
+    if new_track
       tm.play_count.times do
         play = dbt.track_plays.create
         play.user = @user
         play.played_at = track[:play_date_utc]
         play.save
       end
+    else
+      puts("Track already present, skipping track_plays gen.")
     end
 
     # set/add album
