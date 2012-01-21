@@ -57,7 +57,7 @@ class Crawler
         key = ml.library.keys.select { |f| f.start_with?(b_fil) }
         if key.count == 1
           # hooray
-          add_track_with_data(fil, ml.library[key[0]])
+          add_track_with_itunes_data(fil, ml.library[key[0]])
           puts("[%s]: Track added!" % b_fil)
         elsif key.count == 0
           puts("[%s]: could not find in library." % b_fil)
@@ -77,7 +77,7 @@ class Crawler
 
   private
 
-  def add_track_with_data(fil, track)
+  def add_track_with_itunes_data(fil, track)
     dbt = Track.find_or_create_by_file_url fil
     new_track = dbt.new_record?
 

@@ -35,6 +35,7 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "taglib-ruby"
+gem "mp4info"
 
 gem "rspec-rails", :group => [:test, :development]
 group :test do
