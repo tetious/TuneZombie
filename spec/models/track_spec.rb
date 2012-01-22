@@ -30,6 +30,14 @@ describe Track do
 
       track.file_path.should == '/__nil__/__nil__/test.m4a'
     end
+
+    it "should generate a filesafe path" do
+      artist = FactoryGirl.build(:artist, name: 'Bob:$#@% Barker')
+      album = FactoryGirl.build(:album, name: 'Tilverton:$#@% Lives')
+      track = FactoryGirl.build(:track, artist: artist, album: album)
+
+      track.file_path.should == '/Bob_Barker/Tilverton_Lives/test.m4a'
+    end
   end
 
 

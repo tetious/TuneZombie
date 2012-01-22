@@ -17,16 +17,6 @@
 require 'URI'
 require 'helper_patches'
 
-def hash_file(file_name)
-  file_h = Digest::SHA2.new
-  File.open(path_to_file, 'r') do |fh|
-    while buffer = fh.read(1024)
-      file_h << buffer
-    end
-  end
-  file_h
-end
-
 class MusicLibrary
 
   attr_accessor :library

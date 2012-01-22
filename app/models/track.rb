@@ -23,8 +23,8 @@ class Track < ActiveRecord::Base
 
   def file_path
 
-    "/%s/%s/%s" % [self.artist.try_chain(:name, :space_to_underscore) || '__nil__',
-                   self.album.try_chain(:name, :space_to_underscore) || '__nil__',
+    "/%s/%s/%s" % [self.artist.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
+                   self.album.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
                    self.filename]
 
   end
