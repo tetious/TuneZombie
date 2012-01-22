@@ -12,9 +12,9 @@ describe Album do
       album.art_url.should == '/.__TZAlbumArt__/Tilverton_Lives.png'
     end
 
-    it "should use png if art_type is not provided" do
+    it "should exclude extention if art_type is not provided" do
       album = FactoryGirl.build(:album, name: 'Tilverton Lives')
-      album.art_url.should == '/.__TZAlbumArt__/Tilverton_Lives.png'
+      album.art_url.should == '/.__TZAlbumArt__/Tilverton_Lives.'
     end
   end
 

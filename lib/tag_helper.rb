@@ -19,8 +19,14 @@ require 'taglib'
 
 class TagM4a
 
+  attr_accessor :art_type
+
   def initialize(filename)
     @filename = filename
+  end
+
+  def tag_type
+    'm4a'
   end
 
   def load
@@ -36,9 +42,11 @@ class TagM4a
       header = @tag.COVR[0..10]
       case
         when header.include?('JFIF')
-          path += '.jpg'
+          @art_type = 'jpg'
+          path += 'jpg'
         when header.include?('PNG')
-          path += '.png'
+          @art_type = 'png'
+          path += 'png'
         else
           return nil
       end
@@ -54,8 +62,14 @@ end
 
 class TagMp3
 
+  attr_accessor :art_type
+
   def initialize(filename)
     @filename = filename
+  end
+
+  def tag_type
+    'mp3'
   end
 
   def load
@@ -71,9 +85,11 @@ class TagMp3
 
       case apic.mime_type
         when 'image/jpg'
-          path += '.jpg'
+          @art_type = 'jpg'
+          path += 'jpg'
         when 'image/png'
-          path += '.png'
+          @art_type = 'png'
+          path += 'png'
         else
           return nil
       end

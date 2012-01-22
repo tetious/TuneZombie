@@ -19,7 +19,7 @@ class Album < ActiveRecord::Base
 
   def art_url
     '/.__TZAlbumArt__/%s.%s' % [self.name.space_to_underscore.sanitize_for_filename || '__nil__',
-                                self.art_type || 'png']
+                               self.art_type || '']
   end
 
   validates :name, :presence => true

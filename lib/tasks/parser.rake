@@ -19,7 +19,13 @@ require 'crawler'
 namespace :tz do
   desc "Find new media to load"
   task :media, [:username] => :environment do |t, args|
-    c = Crawler.new(args.username)
+    # TODO: get paths from config
+    path = '/Volumes/Big/tmp/music'
+    dest = '/Volumes/Big/TuneZombie/Music'
+    itml = '/Volumes/Big/tmp/iml.xml'
+
+    c = Crawler.new(username: args.username, path_to_search: path,
+                    dest_path: dest, itml_file: itml)
     c.crawl
   end
 end
