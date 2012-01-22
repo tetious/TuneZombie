@@ -1,4 +1,7 @@
 TuneZombie::Application.routes.draw do
+
+  mount JasmineRails::Engine => "/specs" unless Rails.env.production?
+
   resources :genres
 
   resources :artists

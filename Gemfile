@@ -37,9 +37,14 @@ gem 'jquery-rails'
 gem "taglib-ruby"
 gem "mp4info"
 
-gem "rspec-rails", :group => [:test, :development]
+group :test, :development do
+  gem 'jasmine-rails', :git => 'https://github.com/peterlind/jasmine-rails.git'
+  gem "rspec-rails"
+end
+
 group :test do
   gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec"
 end
+
