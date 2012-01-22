@@ -77,6 +77,10 @@ class Crawler
 
   private
 
+  def move_file_based_on_metadata(fil, track)
+
+  end
+
   def add_track_with_itunes_data(fil, track)
     dbt = Track.find_or_create_by_file_url fil
     new_track = dbt.new_record?

@@ -15,6 +15,7 @@
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'URI'
+require 'helper_patches'
 
 def hash_file(file_name)
   file_h = Digest::SHA2.new
@@ -66,7 +67,7 @@ class MusicLibrary
   end
 
   def clean_filename(raw_filename)
-    URI.unescape(File.basename(raw_filename)).downcase.gsub(/\s+/, "_")
+    URI.unescape(File.basename(raw_filename)).downcase.space_to_underscore
   end
 
   private
@@ -80,7 +81,7 @@ class MusicLibrary
     # 2 = key, 6 = value
 
     l = row.split(/[><]/)
-    [l[2].downcase.gsub(/\s+/, "_").to_sym, l[6]]
+    [l[2].downcase.space_to_underscore.to_sym, l[6]]
   end
 
 end

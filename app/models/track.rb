@@ -21,5 +21,13 @@ class Track < ActiveRecord::Base
   belongs_to :album
   has_many :track_plays, dependent: :destroy
 
-  validates :name, :file_url, :presence => true
+  def file_path
+
+    "/%s/%s/%s" % [self.artist.try_chain(:name, :space_to_underscore) || '__nil__',
+                   self.album.try_chain(:name, :space_to_underscore) || '__nil__',
+                   self.filename]
+
+  end
+
+  validates :name, :filename, :presence => true
 end
