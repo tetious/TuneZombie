@@ -1,1 +1,0 @@
-class Albums extends Backbone.Collection

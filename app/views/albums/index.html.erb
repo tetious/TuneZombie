@@ -1,3 +1,4 @@
+
 <div id="left_bar">
   <div id="logo_bar">
     <h4>TuneZombie!</h4>
@@ -11,17 +12,9 @@
     <input type="text" id="left_search">
   </div>
 
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
-  <div class="album">Album</div>
+  <ul id="album_list">
+    <%= render @albums %>
+  </ul>
 
 </div>
 
