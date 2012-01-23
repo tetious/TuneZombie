@@ -8,33 +8,33 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @albums = Albums.find(params[:id])
+    @album = Album.find(params[:id])
 
     respond_with @album
   end
 
   def new
-    @album = Albums.new
+    @album = Album.new
 
     respond_with @album
   end
 
   def edit
-    @album = Albums.find(params[:id])
+    @album = Album.find(params[:id])
   end
 
   def create
-    @album = Albums.new(params[:album])
+    @album = Album.new(params[:album])
     respond_with @album
   end
 
   def update
-    @album = Albums.find(params[:id])
+    @album = Album.find(params[:id])
     respond_with @album
   end
 
   def destroy
-    @album = Albums.find(params[:id])
+    @album = Album.find(params[:id])
     @album.destroy
 
     respond_with @album
