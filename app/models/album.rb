@@ -18,8 +18,9 @@ class Album < ActiveRecord::Base
   has_many :tracks
 
   def art_url
-    '/.__TZAlbumArt__/%s.%s' % [self.name.space_to_underscore.sanitize_for_filename || '__nil__',
-                               self.art_type || '']
+    "#{MUSIC_FOLDER}/.__TZAlbumArt__/%s.%s" %
+        [self.name.space_to_underscore.sanitize_for_filename || '__nil__',
+         self.art_type || '']
   end
 
   validates :name, :presence => true

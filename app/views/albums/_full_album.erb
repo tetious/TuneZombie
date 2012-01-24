@@ -1,6 +1,15 @@
-<div id="album_art">
-  <%= image_tag @album.art_url %>
-</div>
-<div id="album_tracks">
-  <%= render @album.tracks %>
-</div>
+<tr id="album_box">
+  <td>
+    <div id="album_art">
+      <%= image_tag album_art_path(@album), class:"album_art" %>
+    </div>
+  </td>
+  <td>
+    <div id="album_details">
+      <p><%=@album.name%> - <%=@album.tracks.first.artist.name%></p>
+    </div>
+    <div id="album_tracks">
+      <%= render @album.tracks %>
+    </div>
+  </td>
+</tr>

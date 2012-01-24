@@ -29,5 +29,11 @@ class Track < ActiveRecord::Base
 
   end
 
+  def track_name
+
+    "#{number}. #{name}"
+
+  end
+
   validates :name, :filename, :presence => true
 end

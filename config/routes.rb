@@ -10,6 +10,8 @@ TuneZombie::Application.routes.draw do
 
   resources :tracks
 
+  resources :album_art
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

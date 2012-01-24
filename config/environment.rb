@@ -5,3 +5,10 @@ require File.expand_path('../application', __FILE__)
 TuneZombie::Application.initialize!
 
 require 'helper_patches'
+require 'config'
+
+
+
+
+
+

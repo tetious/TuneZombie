@@ -61,5 +61,8 @@ module TuneZombie
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
   end
 end
+
+MUSIC_FOLDER = '/Volumes/Big/TuneZombie/Music'

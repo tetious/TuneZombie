@@ -9,8 +9,9 @@ class AlbumsController < ApplicationController
 
   def show
     @album = Album.find(params[:id])
-
-    respond_with @album
+    respond_with(@album) do |format|
+      format.html { render :layout => !request.xhr? }
+    end
   end
 
   def new

@@ -154,13 +154,13 @@ class Crawler
 
       if album.new_record? || album.art_type.nil? # keep trying if the art isn't there
         tag = TagHelper.create(fil)
-        t_path = tag.save_art_to_path(File.join(@dest_path, album.art_url))
+        t_path = tag.save_art_to_path(album.art_url)
         album.art_type = tag.art_type
+        album.save
         puts("ATWID: Art saved!")
       end
 
       db_track.album = album
-      # TODO: something clever with artwork
     end
 
     # set/add artist
