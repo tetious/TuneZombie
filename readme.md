@@ -6,6 +6,13 @@ It matters not, as we don't care. Reading runes would not be fair.
 
 *Tilverton lives!*
 
+Usage
+=====
+
+TuneZombie is not ready for "real" usage yet. However if you'd like to hack on it, by all means do so.
+To get started, you'll want to add some
+
+
 License
 =======
     TuneZombie is free software: you can redistribute it and/or modify

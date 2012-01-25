@@ -17,17 +17,24 @@
 require 'crawler'
 
 namespace :tz do
-  desc "Find new media to load"
-  task :media, [:username] => :environment do |t, args|
-    # TODO: get paths from config
-    path = '/Volumes/Big/tmp/music'
-    dest = '/Volumes/Big/TuneZombie/Music'
-    itml = '/Volumes/Big/tmp/iml.xml'
 
-    c = Crawler.new(username: args.username, path_to_search: path,
-                    dest_path: dest, itml_file: itml)
-    c.crawl
+  desc """
+Loads media into the TuneZombie database.
+   source_path: Path where your media files are currently.
+   dest_path: Path where TuneZombie will store your media files.
+   user: Username under which any metadata will be added.
+   itunes_xml: Full path to the itunes XML file.
+"""
+  task :crawl => :environment do |t|
+    if ENV['source_path'].blank? || ENV['dest_path'].blank? || ENV['user'].blank?
+      puts "Please provide a value for source_path, dest_path and user."
+    else
+      c = Crawler.new(username: ENV['user'], path_to_search: ENV['source_path'],
+                      dest_path: ENV['dest_path'], itml_file: ENV['itunes_xml'])
+      c.crawl
+    end
   end
+
 end
 
 

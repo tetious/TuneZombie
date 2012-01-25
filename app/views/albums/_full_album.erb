@@ -8,8 +8,8 @@
     <div id="album_details">
       <p><%=@album.name%> - <%=@album.tracks.first.artist.name%></p>
     </div>
-    <div id="album_tracks">
+    <table id="album_tracks">
       <%= render @album.tracks %>
-    </div>
+    </table>
   </td>
 </tr>

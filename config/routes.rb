@@ -12,6 +12,8 @@ TuneZombie::Application.routes.draw do
 
   resources :album_art
 
+  match 'music/*specs' => "music#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
