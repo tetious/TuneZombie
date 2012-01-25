@@ -1,3 +1,13 @@
+/* left album menu params */
+$menu_surround: #101010
+$menu_border: 5px
+$menu_radius: 4px
+
+/* search box params */
+$searchbox_border: 5px
+$searchbox_margin: 5px 0px 8px 0px
+$searchbox_color: #555
+
 body
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
@@ -91,6 +101,7 @@ img
 
 .album_list_item
   font-size: 10pt
+  padding: 4px
 
 @mixin content-block
   position: absolute
@@ -100,13 +111,42 @@ img
   background: #666
 
 #left_item_list
+  background: $menu_surround
+  border-style: solid
+  border-width: $menu_border
+  border-color: $menu_surround
+  -moz-border-radius: $menu_radius
+  border-radius: $menu_radius
   td
     font-size: 10pt
     cursor: pointer
     background: #555
+    -moz-border-radius: 2px
+    border-radius: 2px
 
 #left_search
-  width: 100%
+  width: 80%
+  margin: 8px 0px 8px 8px
+
+/* Elements of the search widget, currently located screen left */
+
+#search_box
+  margin: $searchbox_margin
+  background: $searchbox_color
+  border-style: solid
+  border-width: $searchbox_border
+  border-color: $menu_surround
+  -moz-border-radius: $menu_radius
+  border-radius: $menu_radius
+
+#search_checks
+  padding: 6px
+  font-size: 12px
+
+#search_txt
+  margin-left: 8px
+
+/* End search widget
 
 #left_bar
   @include content-block
@@ -143,4 +183,6 @@ pre
   position: relative
   cursor: pointer
 
+.pagetitle
+  margin: 0px 4px 4px 15px
 
