@@ -5,10 +5,15 @@ module SearchableExtentions
 
   module ClassMethods
     def searchable_as(abbr = nil)
-      @abbr = abbr if !abbr.nil?
+      @searchable_as = abbr if !abbr.nil?
+      @searchable_as
+    end
 
-      @abbr
-    end  end
+    def searchable_columns(hash = nil)
+      @searchable_columns = hash if !hash.nil?
+      @searchable_columns.invert
+    end
+  end
 end
 # include the extension
 ActiveRecord::Base.send(:include, SearchableExtentions)

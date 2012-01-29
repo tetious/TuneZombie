@@ -7,9 +7,12 @@ class SearchParser
     map_classes
   end
 
-
-  def parse_tag
+  def where_for(tag)
     ''
+  end
+
+  def column_for(table_abbr, abbr)
+    model_for(table_abbr).searchable_columns[abbr]
   end
 
   def model_for(abbr)
