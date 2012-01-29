@@ -11,12 +11,5 @@ require 'spec_helper'
 #   end
 # end
 describe MusicHelper do
-  describe "parse_glob" do
 
-    it ""
-
-  end
-
-
-  pending "add some examples to (or delete) #{__FILE__}"
 end

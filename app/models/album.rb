@@ -16,6 +16,7 @@
 
 class Album < ActiveRecord::Base
   has_many :tracks
+  searchable_as :al
 
   def art_url
     "#{MUSIC_FOLDER}/.__TZAlbumArt__/%s.%s" %

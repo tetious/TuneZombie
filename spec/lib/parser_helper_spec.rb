@@ -15,6 +15,7 @@
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
 require "parser_helper"
+require 'spec_helper'
 
 files_path = "#{::Rails.root}/spec/files"
 
