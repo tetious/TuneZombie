@@ -65,4 +65,4 @@ module TuneZombie
   end
 end
 
-MUSIC_FOLDER = '/Volumes/Big/TuneZombie/Music'
+MUSIC_FOLDER = '/Users/rab/Music/tune_zombie'
