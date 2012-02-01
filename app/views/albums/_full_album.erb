@@ -9,6 +9,11 @@
       <p><%=@album.name%> - <%=@album.tracks.first.artist.name%></p>
     </div>
     <table id="album_tracks">
+      <tr>
+        <th>#</th>
+        <th></th>
+        <th></th>
+      </tr>
       <%= render @album.tracks %>
     </table>
   </td>

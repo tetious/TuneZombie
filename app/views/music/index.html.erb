@@ -2,14 +2,23 @@
 <div id="left_bar">
     <h4 class='pagetitle'>TuneZombie!</h4>
 	<div id='search_box'>
-    <h6 id='search_txt'>Search:</h6>
-    <input type="text" id="left_search">
-	<div id='search_checks'>
-	<input type='checkbox' name='search_album' value='should_search_album' checked>Album</input>
-	<input type='checkbox' name='search_title' value='should_search_title' checked>Title</input>
-	<input type='checkbox' name='search_artist' value='should_search_artist' checked>Artist</input>
-	<input type='checkbox' name='search_genre' value='should_search_genre' checked>Genre</input>
-	</div>
+    <table>
+      <tr>
+        <td>
+          <select name="search">
+            <option>Album</option>
+            <option>Artist</option>
+            <option>Track</option>
+          </select>
+        </td>
+        <td>
+          <input type="text" size="50" id="left_search">
+        </td>
+        <td>
+          <button id="run_search">Search</button>
+        </td>
+      </tr>
+    </table>
 	</div>
   <table id="left_item_list">
     <%= render @albums %>
@@ -22,7 +31,18 @@
     <h4>MENU BAR : GLOBAL SEARCH : WHATEVER</h4>
 <!--  </div> -->
 
-  <div id="content_box"></div>
+  <div id="content_box">
+    <table id="track_list">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>Name</td>
+          <td>Rating</td>
+          <td><span class="tooltip" title="Play Count">PC</span></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
 
 </div>
 
