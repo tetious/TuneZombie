@@ -8,107 +8,14 @@ $searchbox_border: 5px
 $searchbox_margin: 5px 0px 8px 0px
 $searchbox_color: #555
 
-body
-  margin: 0px 0px 0px 0px
-  padding: 0px 0px 0px 0px
-  font-family: verdana, arial, helvetica, sans-serif
-  color: #ccc
-  background-color: #333
-
-a 
-  text-decoration: none
-  font-weight: bold
-  color:  #ccc
-  outline: none
-
-a:visited 
-  color:  #ccc
-
-a:active 
-  color:  #ccc
-
-a:hover 
-  color: #ccc
-  text-decoration: underline
-
-strong, b 
-  font-weight: bold
-
-p 
-  font-size: 12px
-
-h1 
-  font-size: 24px
-  line-height: 44px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-h2 
-  font-size: 18px
-  line-height: 40px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-h3 
-  font-size: 16px
-  line-height: 22px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-h4 
-  font-size: 14px
-  line-height: 26px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-h5 
-  font-size: 12px
-  line-height: 22px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-h6 
-  font-size: 10px
-  line-height: 18px
-  font-weight: bold
-  margin-top: 0
-  margin-bottom: 0
-
-img 
-  border: 0
-
-.nowrap 
-  white-space: nowrap
-
-.tiny 
-  font-size: 9px
-  line-height: 16px
-  margin-top: 15px
-  margin-bottom: 5px
-
 #logo_bar
   height: 25px
-  background: #777
 
 #menu_bar
   height: 25px
-  background: #777
 
 .album_list_item
   font-size: 10pt
-  padding: 4px
-
-@mixin content-block
-  position: absolute
-  padding: 10px 2% 10px 2%
-  margin: 0px
-  border: 0px
-  background: #666
 
 #left_item_list
   background: $menu_surround
@@ -125,7 +32,6 @@ img
     border-radius: 2px
 
 #left_search
-  width: 80%
   margin: 8px 0px 8px 8px
 
 /* Elements of the search widget, currently located screen left */
@@ -146,39 +52,32 @@ img
 #search_txt
   margin-left: 8px
 
-/* End search widget
+// End search widget
 
 #left_bar
-  @include content-block
   top: 0px
   left: 0px
-  width: 26%
   height: 90%
 
 #right_box
-  @include content-block
   top: 0px
   right: 0px
-  width: 66%
   height: 90%
 
 #player
-  @include content-block
   bottom: 0px
   left: 0px
-  width: 26%
 
 #left_menu
-  width: 240px
   text-align: center
 
-pre 
+pre
   font-size: 12px
   line-height: 22px
   margin-top: 20px
   margin-bottom: 10px
 
-.tooltip 
+.tooltip
   border-bottom: 1px dotted #333
   position: relative
   cursor: pointer

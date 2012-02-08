@@ -2,11 +2,14 @@
 <html>
 <head>
   <title>TuneZombie</title>
+  <%= stylesheet_link_tag    'http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css' %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js',
+                             :'data-dojo-config' => %Q(dojoBlankHtmlUrl:'/blank.html', baseUrl: 'assets/', modulePaths: {custom: 'custom'}) %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class='claro'>
 
 <%= yield %>
 

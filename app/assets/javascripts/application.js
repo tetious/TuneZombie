@@ -13,7 +13,5 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jqgrid/i18n/grid.locale-en
-//= require jqgrid/jquery-jqgrid
 //= require_tree .
 
