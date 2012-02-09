@@ -12,3 +12,4 @@
  *= require jquery-ui
  *= require_tree .
 */
+dojo.require('dojox.rails');
