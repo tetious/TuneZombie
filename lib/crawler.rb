@@ -55,7 +55,7 @@ class Crawler
         puts("CRAWL: Attempting to add file [%s]" % fil)
         b_fil = ml.clean_filename(fil)
         # see if we can find track data for it
-        key = ml.library.keys.select { |f| f.start_with?(b_fil) }
+        key = ml.library.keys.select { |f| f.start_with?(b_fil) } #TODO: check to see if start_with is valid
         if key.count == 1
           # hooray
           track = add_track_with_itunes_data(fil, ml.library[key[0]])
@@ -113,6 +113,7 @@ class Crawler
     db_track.number = itunes_track[:track_number]
     db_track.size = itunes_track[:size]
     db_track.track_type = itunes_track[:kind]
+    db_track.length = itunes_track[:total_time].to_i / 1000
 
     db_track
 
