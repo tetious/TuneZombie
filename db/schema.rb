@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124002740) do
+ActiveRecord::Schema.define(:version => 20120211024112) do
 
   create_table "albums", :force => true do |t|
     t.string   "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20120124002740) do
     t.datetime "date_added"
     t.string   "filename"
     t.string   "file_hash"
+    t.integer  "length"
   end
 
   create_table "users", :force => true do |t|
