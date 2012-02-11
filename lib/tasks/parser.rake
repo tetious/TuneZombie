@@ -26,14 +26,27 @@ Loads media into the TuneZombie database.
    itunes_xml: Full path to the itunes XML file.
 """
   task :crawl => :environment do |t|
-    if ENV['source_path'].blank? || ENV['dest_path'].blank? || ENV['user'].blank?
+
+    import_user = env_or_setting('import_user')
+    source_path = env_or_setting('source_path')
+    dest_path = env_or_setting('dest_path')
+    itunes_xml_path = env_or_setting('itunes_xml_path')
+
+    if import_user.blank? || source_path.blank? || dest_path.blank?
       puts "Please provide a value for source_path, dest_path and user."
     else
-      c = Crawler.new(username: ENV['user'], path_to_search: ENV['source_path'],
-                      dest_path: ENV['dest_path'], itml_file: ENV['itunes_xml'])
+      c = Crawler.new(username: import_user, path_to_search: source_path,
+                      dest_path: dest_path,  itml_file: itunes_xml_path)
       c.crawl
     end
   end
+
+private
+
+  def env_or_setting(key)
+    ENV[key].blank? ? Settings.find_by_key(key).value: ENV[key]
+  end
+
 
 end
 
