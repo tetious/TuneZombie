@@ -1,9 +1,12 @@
-<tr id="track_<%= track.id %>" class="track">
-  <td>
+<tr id="track_<%= track.id %>" class="album_list_item <%= cycle('row_even', 'row_odd') %>">
+  <td class="track_num">
     <%= track.number %>
   </td>
-  <td class="track_link">
+  <td class="track_name">
     <%= track.name %>
+  </td>
+  <td class="track_time">
+    <%= track.time %>
   </td>
   <td>
     RATING

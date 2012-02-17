@@ -25,5 +25,9 @@ class Album < ActiveRecord::Base
          self.art_type || '']
   end
 
+  def as_json(options={})
+    super(options.merge(include: :tracks))
+  end
+
   validates :name, :presence => true
 end

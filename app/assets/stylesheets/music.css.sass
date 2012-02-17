@@ -8,6 +8,12 @@ $searchbox_border: 5px
 $searchbox_margin: 1px 0px 1px 0px
 $searchbox_color: #555
 
+@mixin unselectable
+  -moz-user-select: -moz-none
+  -khtml-user-select: none
+  -webkit-user-select: none
+  user-select: none
+
 #search_box
   margin: $searchbox_margin
   background: $searchbox_color
@@ -17,9 +23,57 @@ $searchbox_color: #555
   -moz-border-radius: $menu_radius
   border-radius: $menu_radius
 
+.album_box_wrapper
+  height: 150px
+
+.album_box_art
+  float: left
+  width: 120px
+
+.album_box
+  width: 500px
+
+.album_block_tracks
+  border-collapse: collapse
+  border: none
+
+.album_box_details
+  color: white
+  font-size: 12pt
+  padding: 10px
+
 .album_list_item
+  @include unselectable
   font-size: 10pt
   color: white
+
+
+.row_even
+  background-color: #666
+
+.row_odd
+  background-color: #555
+
+.row_selected
+  background-color: #CCFFFF
+  color: black
+
+.row_playing
+  background-color: #444
+  color: #7fffd4
+
+.album_list_item td
+  padding: 5px
+
+.track_num
+  width: 2em
+  text-align: right
+
+.track_name
+  width: 100em
+
+.track_time
+  width: 5em
 
 #left_item_list
   background: $menu_surround
@@ -49,6 +103,9 @@ html, body
   background-color: #777
 
 #app-header
+  background-color: #777
+
+#app-content
   background-color: #777
 
 .claro .demoLayout .edgePanel

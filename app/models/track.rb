@@ -30,9 +30,23 @@ class Track < ActiveRecord::Base
   end
 
   def track_name
-
     "#{number}. #{name}"
+  end
 
+  def time
+    Time.at(length).strftime("%M:%S")
+  end
+
+  def album_name
+    album.name
+  end
+
+  def artist_name
+    artist.name
+  end
+
+  def as_json(options={})
+    super(options.merge(methods: [:album_name, :artist_name]))
   end
 
   validates :name, :filename, :presence => true

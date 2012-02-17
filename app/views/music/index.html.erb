@@ -39,6 +39,9 @@
   <div id="app-content"
        data-dojo-type="dijit.layout.ContentPane"
        data-dojo-props="region: 'center'">
+
+    <%= render partial: "albums/album_box", collection: @albums, :as => :album %>
+
     <div id="track_list">
     </div>
   </div>
