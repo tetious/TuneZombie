@@ -3,13 +3,9 @@ TuneZombie::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" unless Rails.env.production?
 
   resources :genres
-
   resources :artists
-
   resources :albums
-
   resources :tracks
-
   resources :album_art
 
   match 'music/' => "music#index"

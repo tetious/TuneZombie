@@ -23,10 +23,15 @@ class Track < ActiveRecord::Base
 
   def file_path
 
-    "/%s/%s/%s" % [self.artist.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
-                   self.album.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
-                   self.filename]
+    "%s/%s/%s/%s" % [MUSIC_FOLDER,
+                     self.artist.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
+                     self.album.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
+                     self.filename]
 
+  end
+
+  def file_size
+    File.size(file_path)
   end
 
   def track_name
@@ -43,6 +48,14 @@ class Track < ActiveRecord::Base
 
   def artist_name
     artist.name
+  end
+
+  def mime_type
+    "audio/#{file_ext}"
+  end
+
+  def file_ext
+    File.extname(filename)[1,3]
   end
 
   def as_json(options={})

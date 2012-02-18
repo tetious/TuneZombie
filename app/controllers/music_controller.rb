@@ -12,5 +12,4 @@ class MusicController < ApplicationController
 
     respond_with @albums
   end
-
 end

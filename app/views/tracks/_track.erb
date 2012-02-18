@@ -1,4 +1,7 @@
-<tr id="track_<%= track.id %>" class="album_list_item <%= cycle('row_even', 'row_odd') %>">
+<tr id="track_<%= track.id %>" class="album_list_item <%= cycle('row_even', 'row_odd') %>"
+  data-track-id="<%= track.id %>"
+  data-track-ext="<%= track.file_ext %>"
+>
   <td class="track_num">
     <%= track.number %>
   </td>
