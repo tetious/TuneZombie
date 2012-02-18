@@ -1,0 +1,3 @@
+class TrackMetadataController < ApplicationController
+
+end

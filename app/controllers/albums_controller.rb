@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @albums = Album.all
+    @albums = Album.order("name")
 
     respond_with @albums
   end

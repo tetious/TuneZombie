@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery.jplayer
+//= require underscore
+//= require json2
+//= require backbone
 //= require_tree .

@@ -8,7 +8,7 @@ class MusicController < ApplicationController
     #@items = Hash[*params[:specs].split('/')] if !params[:specs].nil?
     #parse_glob 'boo'
 
-    @albums = Album.all
+    @albums = Album.order(:name)
 
     respond_with @albums
   end

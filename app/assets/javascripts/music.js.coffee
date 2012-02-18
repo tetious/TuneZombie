@@ -2,9 +2,11 @@ require ["dijit/layout/BorderContainer"
   "dijit/layout/TabContainer"
   "dijit/layout/ContentPane"]
 
+
+
 playTrack = (e) ->
   row = e.currentTarget
-  $(".album_list_item").removeClass("row_playing")
+  $(".track_list_item").removeClass("row_playing")
   $(row).addClass("row_playing")
   $(row).attr("data-track-id")
 
@@ -23,9 +25,15 @@ playTrack = (e) ->
   )
 
 jQuery ->
-  $(".album_list_item").click ->
-    $(".album_list_item").removeClass("row_selected")
+  @app = window.app ? {}
+
+  @player = new @app.Player("#jquery_jplayer_1", $(".track_list_item"))
+
+  $(".track_list_item").click ->
+    $(".track_list_item").removeClass("row_selected")
     $(@).addClass("row_selected")
 
-  $(".album_list_item").dblclick(playTrack)
-  $("#player").hide()
+  $(".track_list_item").dblclick (e) =>
+    @player.play($(e.currentTarget).attr("data-track-id"))
+
+

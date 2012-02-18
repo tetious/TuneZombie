@@ -1,19 +1,23 @@
-<div id="album_box_<%= album.id %>" class="album_box_wrapper">
-  <div class="album_box_art">
+<table id="album_box_<%= album.id %>" class="album_box_wrapper">
+  <tr>
+  <td class="album_box_art">
     <%= image_tag album_art_path(album), class:"album_art" %>
-  </div>
-  <table class="album_box">
-    <tr>
-      <td class="album_box_details">
-          <div><%=album.name%></div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <table class="album_block_tracks">
-          <%= render album.tracks %>
-        </table>
-      </td>
-    </tr>
-  </table>
-</div>
+  </td>
+  <td class="album_box_wrapper">
+    <table class="album_box">
+      <tr>
+        <td class="album_box_details">
+            <div><%=album.name%></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table class="album_block_tracks">
+            <%= render album.tracks %>
+          </table>
+        </td>
+      </tr>
+    </table>
+   </td>
+  </tr>
+</table>

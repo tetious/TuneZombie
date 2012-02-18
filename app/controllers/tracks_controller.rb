@@ -1,8 +1,8 @@
 class TracksController < ApplicationController
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    @tracks = Track.all
+    @tracks = Track.order("name")
 
     respond_with @tracks
   end
@@ -10,7 +10,12 @@ class TracksController < ApplicationController
   def show
     track = Track.find(params[:id])
 
-    send_track_with_range(track, request, response)
+    if params[:format] == "json"
+      render json: track
+    else
+      send_track_with_range(track, request, response)
+    end
+
   end
 
   def new
