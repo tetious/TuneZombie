@@ -22,7 +22,7 @@ playTrack = (e) ->
 jQuery ->
   @app = window.app ? {}
 
-  $('#app').layout (
+  @layout = $('#app').layout (
     north:
       closable: false
       resizable: false
@@ -32,6 +32,7 @@ jQuery ->
       minSize: 100
 
   )
+  @layout.allowOverflow('north')
 
   $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
 

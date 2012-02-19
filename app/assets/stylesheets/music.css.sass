@@ -25,7 +25,7 @@ $container: #646464
   -moz-border-radius: $menu_radius
   border-radius: $menu_radius
 
-.container
+#header-container
   background-color: $container
   height: 60px
   width: 95%
@@ -48,9 +48,10 @@ $container: #646464
 
 .album_box_wrapper
   vertical-align: top
+  width: 100%
 
 .album_box
-  width: 500px
+  width: 95%
 
 .album_block_tracks
   border-collapse: collapse
@@ -93,11 +94,13 @@ $container: #646464
   text-align: right
 
 .track_name
-  width: 100em
+  width: 35em
 
 .track_time
   width: 5em
 
+.track_rating
+  width: 75px
 
 
 html, body
@@ -121,7 +124,17 @@ html, body
   background-color: #777
 
 #app-content
+  @include unselectable
   background-color: #777
   padding: 2px
 
+#username
+  margin-top: 10px
 
+#player-title-bar
+  background-color: #444
+  border-bottom-right-radius: 6px
+  border-bottom-left-radius: 6px
+
+#player-title
+  color: white

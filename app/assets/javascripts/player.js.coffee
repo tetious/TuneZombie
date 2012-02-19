@@ -5,6 +5,11 @@ class Player
       swfPath: "/assets"
       supplied: "mp3"
     )
+    $("#player-title-bar").hide()
+
+    $("#app-header").mouseenter @fadeInTitleCard
+    $("#app-header").mouseleave @fadeOutTitleCard
+
     #@app = window.app
 
     @playlist = _.map(rows, (i) -> parseInt $(i).attr('data-track-id'))
@@ -16,9 +21,31 @@ class Player
   updateCurrentTrackMetadata: ->
     #TODO: do something
 
-  markRowPlaying: ->
+  markPlaying: ->
     $(".track_list_item").removeClass("row_playing")
     $("#track_#{@current.id}").addClass("row_playing")
+
+    $("#player-title").text(@current.title())
+    rating = @current.get("rating")
+    $("#player-rating").html("<img src='/assets/rating/#{rating}_star.png'/>")
+
+    @fadeInTitleCard()
+    @cardVisible = false # autohide only happens if it is marked not visible
+    setTimeout(@autoHideTitleCard, 5000)
+
+  fadeInTitleCard: =>
+    console.log("Fading in title card.")
+    @cardVisible = true
+    $("#player-title-bar").slideDown(100)
+
+  fadeOutTitleCard: =>
+    console.log("Fading out title card.")
+    @cardVisible = false
+    $("#player-title-bar").slideUp(100)
+
+  autoHideTitleCard: => # we only want to autohide if the user hasn't manually activated the card
+    console.log("Autohiding title card. cardVisible:" + @cardVisible)
+    @fadeOutTitleCard() if @cardVisible == false
 
   prev: ->
     idx = @playlist.indexOf(@current.id) - 1
@@ -50,12 +77,12 @@ class Player
           ready: =>
             $(@player).jPlayer("setMedia", @current.media())
             $(@player).jPlayer("play")
-            @.markRowPlaying()
+            @markPlaying()
 
           ended: =>
-            @.updateCurrentTrackMetadata()
+            @updateCurrentTrackMetadata()
             #get the next track
-            @.play(@.next())
+            @play(@.next())
 
           timeupdate: (e) =>
             @current.timeTick(e.jPlayer.status.currentTime)

@@ -17,6 +17,14 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  def self.current
+    User.find_by_name(Thread.current[:user])
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
   validates_presence_of :password, :on => :create
   validates_uniqueness_of :name
 end

@@ -18,6 +18,9 @@ class Track extends Backbone.Model
     @time = time
     console.log ("currentTime: #{time} timePlayed: #{@timePlayed}")
 
+  title: ->
+    @get("album_name") + " - " + @get("name")
+
   media: ->
     tmp = {}
     tmp[@.get("file_ext")] = "/tracks/#{@id}"

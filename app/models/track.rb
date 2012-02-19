@@ -42,6 +42,15 @@ class Track < ActiveRecord::Base
     Time.at(length).strftime("%M:%S")
   end
 
+  def rating
+    metadata = TrackMetadata.find_or_create_by_user_and_track(User.current, self)
+    metadata.rating
+  end
+
+  def rating=(rating)
+    TrackMetadata.find_or_create_by_user_and_track(User.current, self).update(rating: rating)
+  end
+
   def album_name
     album.name
   end
@@ -59,7 +68,7 @@ class Track < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(methods: [:file_ext]))
+    super(options.merge(methods: [:file_ext, :rating, :album_name]))
   end
 
   validates :name, :filename, :presence => true

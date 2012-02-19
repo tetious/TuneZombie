@@ -1,8 +1,7 @@
 <div id="app">
   <div id="app-header" class="navbar ui-layout-north">
-  <div class="container navbar-inner">
+  <div id="header-container" class="container navbar-inner">
       <div id="logo" class="brand"><img src="assets/logo.png"/></div>
-
       <div id="player">
         <%= render partial: "music/player" %>
       </div>
@@ -10,7 +9,23 @@
       <form id ="search" class="navbar-search pull-right">
         <input type="text" class="search-query" placeholder="Search">
       </form>
-  </div>
+      <ul id="username" class="nav pull-right">
+        <li class="dropdown">
+          <a href="#"
+             class="dropdown-toggle"
+             data-toggle="dropdown">
+            <%= current_user %>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+            <li class="divider"></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 </div>
   <div id="app-left" class="ui-layout-west">
     <table id="left_item_list">
