@@ -7,6 +7,7 @@ TuneZombie::Application.routes.draw do
   resources :albums
   resources :tracks
   resources :album_art
+  resources :users
 
   match 'music/' => "music#index"
   match 'music/*specs' => "music#index"

@@ -8,6 +8,8 @@ $searchbox_border: 5px
 $searchbox_margin: 1px 0px 1px 0px
 $searchbox_color: #555
 
+$container: #646464
+
 @mixin unselectable
   -moz-user-select: -moz-none
   -khtml-user-select: none
@@ -22,6 +24,17 @@ $searchbox_color: #555
   border-color: $menu_surround
   -moz-border-radius: $menu_radius
   border-radius: $menu_radius
+
+.container
+  background-color: $container
+  height: 60px
+  vertical-align: center
+
+#logo
+  padding: 18px 50px
+
+#search
+  padding: 10px 12px
 
 .album_box_wrapper
   height: 150px
@@ -45,7 +58,12 @@ $searchbox_color: #555
   font-size: 12pt
   padding: 10px
 
-.album_list_item, .track_list_item
+.album_list_item
+  @include unselectable
+  font-size: 8pt
+  color: white
+
+.track_list_item
   @include unselectable
   font-size: 10pt
   color: white
@@ -77,19 +95,7 @@ $searchbox_color: #555
 .track_time
   width: 5em
 
-#left_item_list
-  background: $menu_surround
-  border-style: solid
-  border-width: $menu_border
-  border-color: $menu_surround
-  -moz-border-radius: $menu_radius
-  border-radius: $menu_radius
-  td
-    font-size: 10pt
-    cursor: pointer
-    background: #555
-    -moz-border-radius: 2px
-    border-radius: 2px
+
 
 html, body
   height: 100%
@@ -99,21 +105,19 @@ html, body
 
 #app
   height: 100%
-
-#app-left
-  width: 16em
-  background-color: #777
+  min-width: 1000px
 
 #app-header
+  overflow: hidden
+  background-color: #888
+  -moz-border-radius: 2px
+  border-radius: 2px
+
+#app-left
   background-color: #777
 
 #app-content
   background-color: #777
+  padding: 2px
 
-#app-footer
-  background-color: #777
-  height: 40px
-
-.claro .demoLayout .edgePanel
-  background-color: #d0e9fc
 

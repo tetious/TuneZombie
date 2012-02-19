@@ -1,5 +1,5 @@
 <tr>
-  <td id="album_<%= album.id %>" class="album_list_item">
+  <td id="album_<%= album.id %>" class="album_list_item <%= cycle('row_even', 'row_odd') %>">
     <%= album.name %>
   </td>
 </tr>

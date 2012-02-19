@@ -1,58 +1,24 @@
-<div id="app" class="app-layout"
-     data-dojo-type="dijit.layout.BorderContainer"
-     data-dojo-props="design: 'headline'">
+<div id="app">
+  <div id="app-header" class="navbar ui-layout-north">
+  <div class="container navbar-inner">
+      <div id="logo" class="brand">TuneZombie!</div>
 
-  <div id="app-header"
-       data-dojo-type="dijit.layout.ContentPane"
-       data-dojo-props="region: 'top'">
-    <div id='search_box'>
-      <table class="table">
-        <tr>
-          <td>
-            <select name="search">
-              <option>Album</option>
-              <option>Artist</option>
-              <option>Track</option>
-            </select>
-          </td>
-          <td>
-            <input type="text" size="50" id="left_search">
-          </td>
-          <td>
-            <button id="run_search">Search</button>
-          </td>
-        </tr>
-      </table>
-    </div>
+      <div id="player">
+        <%= render partial: "music/player" %>
+      </div>
+
+      <form id ="search" class="navbar-search pull-right">
+        <input type="text" class="search-query" placeholder="Search">
+      </form>
   </div>
-
-  <div id="app-left"
-       data-dojo-type="dijit.layout.ContentPane"
-       data-dojo-props="region: 'left', splitter: true">
-
-
+</div>
+  <div id="app-left" class="ui-layout-west">
     <table id="left_item_list">
       <%= render @albums %>
     </table>
   </div>
 
-  <div id="app-content"
-       data-dojo-type="dijit.layout.ContentPane"
-       data-dojo-props="region: 'center'">
-
+  <div id="app-content" class="ui-layout-center">
     <%= render partial: "albums/album_box", collection: @albums, :as => :album %>
-
-    <div id="track_list">
-    </div>
   </div>
-
-  <div id="app-footer"
-    data-dojo-type="dijit.layout.ContentPane"
-    data-dojo-props="region: 'bottom'">
-    <div id="player">
-      <%= render partial: "music/player" %>
-    </div>
-  </div>
-
 </div>
-

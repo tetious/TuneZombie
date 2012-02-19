@@ -1,8 +1,3 @@
-require ["dijit/layout/BorderContainer"
-  "dijit/layout/TabContainer"
-  "dijit/layout/ContentPane"]
-
-
 
 playTrack = (e) ->
   row = e.currentTarget
@@ -26,6 +21,18 @@ playTrack = (e) ->
 
 jQuery ->
   @app = window.app ? {}
+
+  $('#app').layout (
+    north:
+      closable: false
+      resizable: false
+      spacing_open: 0
+    west:
+      minSize: 100
+
+  )
+
+  $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
 
   @player = new @app.Player("#jquery_jplayer_1", $(".track_list_item"))
 

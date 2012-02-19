@@ -10,5 +10,7 @@
  *
  *= require_self
  *= require jplayer.blue.monday
+ *= require bootstrap
+ *= require layout
  *= require_tree .
 */

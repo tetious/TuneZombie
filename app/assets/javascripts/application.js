@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery.jplayer
+//= require jquery-ui
 //= require underscore
 //= require json2
 //= require backbone
+//= require bootstrap
+//= require jquery.layout
 //= require_tree .

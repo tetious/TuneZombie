@@ -15,4 +15,8 @@
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
 class User < ActiveRecord::Base
+  has_secure_password
+
+  validates_presence_of :password, :on => :create
+  validates_uniqueness_of :name
 end
