@@ -27,6 +27,7 @@ jQuery ->
       closable: false
       resizable: false
       spacing_open: 0
+      size: 70
     west:
       minSize: 100
 
