@@ -28,9 +28,18 @@
     </div>
 </div>
   <div id="app-left" class="ui-layout-west">
-    <table id="left_item_list">
-      <%= render @albums %>
-    </table>
+    <div id="left-accordion">
+      <h3>Albums</h3>
+        <div>
+          <ul id="album-list" class="item-list">
+            <%= render @albums %>
+          </ul>
+        </div>
+      <h3>Artists</h3>
+        <p>Not implemented.</p>
+      <h3>Playlists</h3>
+        <p>Not implemented.</p>
+    </div>
   </div>
 
   <div id="app-content" class="ui-layout-center">

@@ -12,5 +12,6 @@
  *= require jplayer.blue.monday
  *= require bootstrap
  *= require layout
+ *= require jquery-ui-tz
  *= require_tree .
 */

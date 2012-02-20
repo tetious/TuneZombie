@@ -25,6 +25,8 @@ window.App =
     )
     @layout.allowOverflow('north')
 
+    $("#left-accordion").accordion icons:false, autoHeight: false
+
     $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
 
     @player = new App.Player("#jquery_jplayer_1", $(".track_list_item"))

@@ -62,10 +62,17 @@ $container: #646464
   font-size: 12pt
   padding: 10px
 
-.album_list_item
+.item-list
   @include unselectable
-  font-size: 8pt
-  color: white
+  margin: 0px
+  li
+    background-color: #666
+    font-size: 10pt
+    white-space: nowrap
+    color: white
+    list-style-type: none
+  li:nth-child(odd)
+    background-color: #555
 
 .track_list_item
   @include unselectable
