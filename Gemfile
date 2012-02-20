@@ -38,6 +38,9 @@ gem "taglib-ruby"
 gem "mp4info"
 gem "squeel"
 
+gem 'ejs', '~> 1.0.0'
+gem 'eco', '~> 1.0.0'
+
 group :test, :development do
   gem 'jasmine-rails', :git => 'https://github.com/peterlind/jasmine-rails.git'
   gem "rspec-rails"

@@ -5,11 +5,14 @@ class Helper
 
 window.App =
   Models: {}
+  Views: {}
 
   init: ->
 
     @albums = new App.Models.Albums
+    @albumsList = new App.Views.AlbumList collection:@albums
     @albums.fetch()
+
     @artists = new App.Models.Artists
     @artists.fetch()
 
