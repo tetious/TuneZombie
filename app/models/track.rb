@@ -70,7 +70,7 @@ class Track < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(methods: [:file_ext, :rating, :album_name]))
+    super(options.merge(methods: [:file_ext, :rating]))
   end
 
   validates :name, :filename, :presence => true

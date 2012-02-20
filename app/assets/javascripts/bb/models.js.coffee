@@ -1,4 +1,4 @@
-class Track extends Backbone.Model
+class App.Models.Track extends Backbone.Model
 
   initialize: ->
     @time = 0
@@ -17,19 +17,21 @@ class Track extends Backbone.Model
     @time = time
     console.log ("currentTime: #{time} timePlayed: #{@timePlayed}")
 
-  title: ->
-    @get("album_name") + " - " + @get("name")
+  albumName: ->
+    @album ||= App.albums.get(@get("album_id"))
+    @album.get("name")
 
   media: ->
     tmp = {}
     tmp[@get("file_ext")] = "/tracks/#{@id}"
     tmp
 
-class Tracks extends Backbone.Collection
+class App.Models.Tracks extends Backbone.Collection
   url: '/tracks'
-  model: Track
+  model: App.Models.Track
 
+class App.Models.Albums extends Backbone.Collection
+  url: '/albums'
 
-@app = window.app ? {}
-@app.Track = Track
-@app.Tracks = Tracks
+class App.Models.Artists extends Backbone.Collection
+  url: '/artists'

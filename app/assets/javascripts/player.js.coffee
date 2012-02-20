@@ -25,7 +25,8 @@ class Player
     $(".track_list_item").removeClass("row_playing")
     $("#track_#{@current.id}").addClass("row_playing")
 
-    $("#player-title").text(@current.title())
+    $("#player-album-name").text(@current.albumName())
+    $("#player-track-name").text(@current.get("name"))
     rating = @current.get("rating")
     $("#player-rating").html("<img src='/assets/rating/#{rating}_star.png'/>")
 
@@ -34,12 +35,10 @@ class Player
     setTimeout(@autoHideTitleCard, 5000)
 
   fadeInTitleCard: =>
-    console.log("Fading in title card.")
     @cardVisible = true
     $("#player-title-bar").slideDown(100)
 
   fadeOutTitleCard: =>
-    console.log("Fading out title card.")
     @cardVisible = false
     $("#player-title-bar").slideUp(100)
 
@@ -70,7 +69,7 @@ class Player
     if id == 0
       return
 
-    @current = new app.Track id: id
+    @current = new App.Models.Track id: id
 
     @current.fetch success: =>
       $(@player).jPlayer(
@@ -91,5 +90,4 @@ class Player
           supplied: @current.get("file_ext")
       )
 
-@app = window.app ? {}
-@app.Player = Player
+App.Player = Player

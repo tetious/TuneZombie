@@ -18,4 +18,5 @@
 //= require backbone
 //= require bootstrap
 //= require jquery.layout
+//= require app
 //= require_tree .
