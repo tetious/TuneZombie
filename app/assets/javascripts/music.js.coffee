@@ -20,7 +20,7 @@ playTrack = (e) ->
   )
 
 jQuery ->
-  @app = window.app ? {}
+  @app = window.app
 
   @layout = $('#app').layout (
     north:
@@ -38,11 +38,24 @@ jQuery ->
 
   @player = new @app.Player("#jquery_jplayer_1", $(".track_list_item"))
 
-  $(".track_list_item").click ->
+  $(".track_list_item").click -> # highlight track
     $(".track_list_item").removeClass("row_selected")
     $(@).addClass("row_selected")
 
-  $(".track_list_item").dblclick (e) =>
+  $(".track_list_item").dblclick (e) => # play track
     @player.play($(e.currentTarget).attr("data-track-id"))
+
+  $(".track_rating").click (e) =>
+    el = e.currentTarget
+    id = $(el).parent().data("track-id")
+    newRating = Math.round((e.offsetX + 5) / 16)
+
+    track = new @app.Track id: id
+    track.set("rating", newRating)
+    track.save()
+
+    @app.Helper.RatingTag(el, newRating)
+    @app.Helper.RatingTag("#player-rating", newRating) if $(el).parent().hasClass("row_playing")
+
 
 

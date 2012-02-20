@@ -47,8 +47,10 @@ class Track < ActiveRecord::Base
     metadata.rating
   end
 
-  def rating=(rating)
-    TrackMetadata.find_or_create_by_user_and_track(User.current, self).update(rating: rating)
+  def rating=(value)
+    tm = TrackMetadata.find_or_create_by_user_and_track(User.current, self)
+    tm.rating = value
+    tm.save
   end
 
   def album_name

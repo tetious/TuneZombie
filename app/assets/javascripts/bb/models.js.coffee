@@ -1,4 +1,3 @@
-
 class Track extends Backbone.Model
 
   initialize: ->
@@ -23,8 +22,14 @@ class Track extends Backbone.Model
 
   media: ->
     tmp = {}
-    tmp[@.get("file_ext")] = "/tracks/#{@id}"
+    tmp[@get("file_ext")] = "/tracks/#{@id}"
     tmp
+
+class Tracks extends Backbone.Collection
+  url: '/tracks'
+  model: Track
+
 
 @app = window.app ? {}
 @app.Track = Track
+@app.Tracks = Tracks

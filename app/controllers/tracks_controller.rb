@@ -38,9 +38,11 @@ class TracksController < ApplicationController
 
   # PUT /tracks/1
   def update
-    @track = Track.find(params[:id])
-    flash[:notice] = "Track was successfully updated." if @track.save
-    respond_with @track
+
+    #TODO figure out why :track doesn't have rating
+    params[:track][:rating] = params[:rating]
+
+    respond_with Track.update(params[:id], params[:track])
   end
 
   # DELETE /tracks/1

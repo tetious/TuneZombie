@@ -10,7 +10,7 @@ class Player
     $("#app-header").mouseenter @fadeInTitleCard
     $("#app-header").mouseleave @fadeOutTitleCard
 
-    #@app = window.app
+    #App = window.app
 
     @playlist = _.map(rows, (i) -> parseInt $(i).attr('data-track-id'))
 
