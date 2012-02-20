@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
     #THIS IS JUST TEMPORARY!
     session[:user] = @user.name
+    session[:user_id] = @user.id
 
     redirect_to music_url
 

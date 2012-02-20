@@ -10,6 +10,13 @@ class App.Models.Track extends Backbone.Model
     else
       "/tracks"
 
+  markPlayed: ->
+    tp = new App.Models.TrackPlays
+    tp.create(user_id: App.user_id, track_id: @id, played_time: @timePlayed)
+
+    @time = 0
+    @timePlayed = 0
+
   timeTick: (time) ->
     if @time < time # if we've moved forward in time
       @timePlayed += time - @time
@@ -35,3 +42,6 @@ class App.Models.Albums extends Backbone.Collection
 
 class App.Models.Artists extends Backbone.Collection
   url: '/artists'
+
+class App.Models.TrackPlays extends Backbone.Collection
+  url: '/track_plays'

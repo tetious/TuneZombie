@@ -13,6 +13,8 @@ window.App =
     @artists = new App.Models.Artists
     @artists.fetch()
 
+    @user_id = $("body").data("user-id")
+
     @layout = $('#app').layout (
       north:
         closable: false

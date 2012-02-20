@@ -17,22 +17,26 @@ class Player
     #_.map(t,function(i) { return {id: i.id, playing: $(i).hasClass("row_playing") } })
     #var n = _.map(t, function (i) { return $(i).attr('data-track-id'); })
 
-  # update the server
-  updateCurrentTrackMetadata: ->
-    #TODO: do something
-
   markPlaying: ->
+    @playing = true
     $(".track_list_item").removeClass("row_playing")
     $("#track_#{@current.id}").addClass("row_playing")
+    @updateTitleCard()
 
+  updateTitleCard: ->
     $("#player-album-name").text(@current.albumName())
     $("#player-track-name").text(@current.get("name"))
     rating = @current.get("rating")
     $("#player-rating").html("<img src='/assets/rating/#{rating}_star.png'/>")
 
     @fadeInTitleCard()
-    @cardVisible = false # autohide only happens if it is marked not visible
+    @cardVisible = false
+    # autohide only happens if it is marked not visible
     setTimeout(@autoHideTitleCard, 5000)
+
+  markStopped: ->
+    @playing = false
+    $("#track_#{@current.id}").removeClass("row_playing")
 
   fadeInTitleCard: =>
     @cardVisible = true
@@ -63,7 +67,7 @@ class Player
       @playlist[idx]
 
   play: (id) ->
-
+    @current.markPlayed() if @current
     $(@player).jPlayer("destroy")
 
     if id == 0
@@ -79,12 +83,18 @@ class Player
             @markPlaying()
 
           ended: =>
-            @updateCurrentTrackMetadata()
-            #get the next track
-            @play(@.next())
+            @play(@next())
+
+          play: =>
+            @markPlaying()
 
           timeupdate: (e) =>
-            @current.timeTick(e.jPlayer.status.currentTime)
+            if e.jPlayer.status.currentTime == 0 and e.jPlayer.status.paused and @playing
+              console.log "Stopped"
+              @current.markPlayed()
+              @markStopped()
+            else
+              @current.timeTick(e.jPlayer.status.currentTime)
 
           swfPath: "/assets"
           supplied: @current.get("file_ext")

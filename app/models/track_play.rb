@@ -18,5 +18,9 @@ class TrackPlay < ActiveRecord::Base
   belongs_to :track
   belongs_to :user
 
+  before_create do |track_play|
+    track_play.played_at = DateTime.now if track_play.played_at.nil?
+  end
+
   validates :user_id, :track_id, :presence => true
 end

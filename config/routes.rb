@@ -6,6 +6,7 @@ TuneZombie::Application.routes.draw do
   resources :artists
   resources :albums
   resources :tracks
+  resources :track_plays
   resources :album_art
   resources :users
 
