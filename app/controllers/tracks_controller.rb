@@ -54,35 +54,48 @@ class TracksController < ApplicationController
   end
 
 private
+
+  # Hand rolled Range support so we don't need a proper web server or have to deal with
+  # the implications thereof. It is likely there are bugs in this, and that there are better
+  # ways to handle it all.
+  #
   def send_track_with_range(track, request, response)
     file_begin = 0
     file_size = track.file_size
     file_end = file_size - 1
 
     if request.headers["Range"]
+      logger.debug "Range present :" + request.headers["Range"]
       status_code = "206 Partial Content"
       match = request.headers['range'].match(/bytes=(\d+)-(\d*)/)
       if match
         file_begin = match[1].to_i
-        file_end = match[1] if match[2] && !match[2].empty?
+        file_end = match[2].to_i unless match[2].empty?
+        logger.debug "Range: file_begin: #{file_begin} file_end: #{file_end}"
       end
-      response.header["Content-Range"] = "bytes " + file_begin.to_s + "-" + file_end.to_s + "/" + file_size.to_s
+      response.header["Content-Range"] = "bytes #{file_begin}-#{file_end}/#{file_size}"
     else
       status_code = "200 OK"
     end
-    response.header["Content-Length"] = (file_end.to_i - file_begin.to_i + 1).to_s
+    response.header["Content-Type"] = track.mime_type
+    response.header["Content-Length"] = (file_end - file_begin + 1).to_s
 
-    response.header["Cache-Control"] = "public, must-revalidate, max-age=0"
-    response.header["Pragma"] = "no-cache"
-    response.header["Accept-Ranges"]=  "bytes"
+    response.header["Accept-Ranges"]=  "bytes" # This fixes ranges with Chrome
     response.header["Content-Transfer-Encoding"] = "binary"
 
-    send_data(IO.binread(track.file_path, nil, file_begin),
+    send_data(binread(track.file_path, file_end - file_begin, file_begin),
               :filename => track.filename,
               :disposition => "inline",
               :status => status_code,
               :stream =>  'true',
               :buffer_size  =>  4096)
+  end
+
+  def binread(name, range, offset)
+    File.open(name, 'rb') do |f|
+      f.seek(offset) if offset
+      f.read(range)
+    end
   end
 
 end

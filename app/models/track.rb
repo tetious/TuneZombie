@@ -62,7 +62,8 @@ class Track < ActiveRecord::Base
   end
 
   def mime_type
-    "audio/#{file_ext}"
+    mime_types = {m4a: "audio/mp4a-latm", mp3: "audio/mpeg"}
+    mime_types[file_ext.to_sym]
   end
 
   def file_ext
