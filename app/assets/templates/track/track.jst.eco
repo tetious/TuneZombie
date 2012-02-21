@@ -1,0 +1,12 @@
+<td class="track_num">
+  <%= @track.number %>
+</td>
+<td class="track_name">
+  <%= @track.name %>
+</td>
+<td class="track_time">
+  <%= @track.time %>
+</td>
+<td class="track_rating">
+  <img src="assets/rating/<%= @track.rating %>_star.png" />
+</td>

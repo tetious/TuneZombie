@@ -22,3 +22,5 @@ class App.Views.AlbumListItem extends Backbone.View
   render: ->
     $(@el).html(@model.get("name"))
     this
+
+

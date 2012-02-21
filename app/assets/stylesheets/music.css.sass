@@ -39,23 +39,32 @@ $container: #646464
 #search
   padding: 10px 12px
 
-.album_box_wrapper
-  height: 150px
+.album_box
+  width: 95%
 
 .album_box_art
   float: left
   width: 120px
 
-.album_box_wrapper
+.album-box-wrapper
   vertical-align: top
   width: 100%
 
-.album_box
-  width: 95%
+.album-box-wrapper-cell
+  height: 150px
 
 .album_block_tracks
+  @include unselectable
   border-collapse: collapse
   border: none
+  tr
+    font-size: 10pt
+    color: white
+    background-color: #666
+    td
+      padding: 5px
+  tr:nth-child(odd)
+    background-color: #555
 
 .album_box_details
   color: white
@@ -74,26 +83,15 @@ $container: #646464
   li:nth-child(odd)
     background-color: #555
 
-.track_list_item
-  @include unselectable
-  font-size: 10pt
-  color: white
+.track-list-item
 
-.row_even
-  background-color: #666
-
-.row_odd
-  background-color: #555
 
 .row_selected
   background-color: #003366
 
 .row_playing
-  background-color: #444
-  color: #7fffd4
-
-.track_list_item td
-  padding: 5px
+  background-color: #444 !important
+  color: #7fffd4 !important
 
 .track_num
   width: 2em

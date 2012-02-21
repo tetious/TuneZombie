@@ -10,7 +10,8 @@ window.App =
   init: ->
 
     @albums = new App.Models.Albums
-    @albumsList = new App.Views.AlbumList collection:@albums
+    @albumsList = new App.Views.AlbumList collection: @albums
+    @albumBoxList = new App.Views.AlbumBoxList collection: @albums
     @albums.fetch()
 
     @artists = new App.Models.Artists
@@ -32,26 +33,15 @@ window.App =
 
     $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
 
-    @player = new App.Player("#jquery_jplayer_1", $(".track_list_item"))
+    @player = new App.Player("#jquery_jplayer_1", $(".track-list-item"))
 
-    $(".track_list_item").click -> # highlight track
-      $(".track_list_item").removeClass("row_selected")
+    $(".track-list-item").click -> # highlight track
+      $(".track-list-item").removeClass("row_selected")
       $(@).addClass("row_selected")
 
-    $(".track_list_item").dblclick (e) => # play track
+    $(".track-list-item").dblclick (e) => # play track
       @player.play($(e.currentTarget).attr("data-track-id"))
 
-    $(".track_rating").click (e) =>
-      el = e.currentTarget
-      id = $(el).parent().data("track-id")
-      newRating = Math.round((e.offsetX + 5) / 16)
-
-      track = new App.Models.Track id: id
-      track.set("rating", newRating)
-      track.save()
-
-      Helper.RatingTag(el, newRating)
-      Helper.RatingTag("#player-rating", newRating) if $(el).parent().hasClass("row_playing")
 
 
 App.Helper = Helper

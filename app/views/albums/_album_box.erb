@@ -1,9 +1,9 @@
-<table id="album_box_<%= album.id %>" class="album_box_wrapper">
+<table id="album_box_<%= album.id %>" class="album-box-wrapper">
   <tr>
   <td class="album_box_art">
     <%= image_tag album_art_path(album), class:"album_art" %>
   </td>
-  <td class="album_box_wrapper">
+  <td class="album-box-wrapper-cell">
     <table class="album_box">
       <tr>
         <td class="album_box_details">
@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>
-          <table class="album_block_tracks">
+          <table id="album-block-tracks" class="album_block_tracks">
             <%= render album.tracks %>
           </table>
         </td>

@@ -16,6 +16,7 @@
 
 class Album < ActiveRecord::Base
   has_many :tracks
+  validates :name, :presence => true
   searchable_as :al
   searchable_columns name: 'n'
 
@@ -25,9 +26,11 @@ class Album < ActiveRecord::Base
          self.art_type || '']
   end
 
-  def as_json(options={})
-    super(options.merge(include: :tracks))
+  def artist_name
+    self.tracks.first.artist.name
   end
 
-  validates :name, :presence => true
+  def as_json(options={})
+    super(options.merge(:include => {:tracks => {:methods => :rating}}, :methods => :artist_name))
+  end
 end
