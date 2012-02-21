@@ -1,5 +1,6 @@
 jQuery ->
-  App.init()
+  if $('#app').length > 0
+    App.init()
 
 
 

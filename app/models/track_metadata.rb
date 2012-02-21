@@ -22,7 +22,7 @@ class TrackMetadata < ActiveRecord::Base
 
     tm = TrackMetadata.where(user_id: user, track_id: track)
     if tm.empty?
-      tm = TrackMetadata.create(user: user, track: track)
+      tm = TrackMetadata.create(user: user, track: track, rating: 0)
     else
       tm.first
     end

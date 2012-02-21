@@ -70,7 +70,7 @@ class App.Views.TrackListItem extends Backbone.View
     App.player.play(@model)
 
   updateRating: (e) ->
-    @model.setRating(e.offsetX)
+    @model.setRating(e)
 
   rowPlay: ->
     $(@el).addClass("row_playing")

@@ -15,7 +15,7 @@ class App.Views.PlayerView extends Backbone.View
     @fadeOutTitleCard()
 
   updateRating: (e) =>
-    @model.setRating(e.offsetX)
+    @model.setRating(e)
 
   fadeInTitleCard: =>
     $("#player-title-bar").slideDown(100) unless @cardVisible

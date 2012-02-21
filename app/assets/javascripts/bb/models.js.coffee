@@ -24,8 +24,15 @@ class App.Models.Track extends Backbone.Model
       @time = 0
       @timePlayed = 0
 
-  setRating: (offsetX) ->
-    newRating = Math.round((offsetX + 5) / 16)
+  setRating: (e) ->
+    if e.offsetX
+      offX = e.offsetX
+    else
+      # this magical garbage is here because Firefox decided not to implement offsetX
+      # the 6 is the width of the layout slider div
+      offX = e.pageX - $(e.target).position().left - $("#app-left").width() - 6
+
+    newRating = Math.round((offX + 5) / 16)
     @set("rating", newRating)
     @save()
 

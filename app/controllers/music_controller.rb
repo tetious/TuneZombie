@@ -4,12 +4,10 @@ class MusicController < ApplicationController
 
   # music/tab/albums/?album_name=foo
   def index
-
-    #@items = Hash[*params[:specs].split('/')] if !params[:specs].nil?
-    #parse_glob 'boo'
-
-    @albums = Album.order(:name)
-
-    respond_with @albums
+    if User.current
+      respond_with Album.order(:name)
+    else
+      redirect_to user_path
+    end
   end
 end
