@@ -1,44 +1,21 @@
 class AlbumsController < ApplicationController
-  respond_to :html, :json
+  respond_to :json
 
   def index
-    @albums = Album.order("name")
-
-    respond_with @albums
+    respond_with Album.order("name")
   end
 
   def show
-    @album = Album.find(params[:id])
-    respond_with(@album) do |format|
-      format.html { render :layout => !request.xhr? }
-    end
+    respond_with Album.find(params[:id])
   end
 
-  def new
-    @album = Album.new
-
-    respond_with @album
-  end
-
-  def edit
-    @album = Album.find(params[:id])
-  end
-
-  def create
-    @album = Album.new(params[:album])
-    respond_with @album
-  end
 
   def update
-    @album = Album.find(params[:id])
-    respond_with @album
+    respond_with Album.update(params[:id], params[:album])
   end
 
   def destroy
-    @album = Album.find(params[:id])
-    @album.destroy
-
-    respond_with @album
+    respond_with Album.find(params[:id]).destroy
   end
 
 end

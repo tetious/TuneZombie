@@ -2,9 +2,7 @@ class TracksController < ApplicationController
   respond_to :json
 
   def index
-    @tracks = Track.order("name")
-
-    respond_with @tracks
+    respond_with Track.order("name")
   end
 
   def show
@@ -15,42 +13,17 @@ class TracksController < ApplicationController
     else
       send_track_with_range(track, request, response)
     end
-
   end
 
-  def new
-    @track = Track.new
-
-    respond_with @track
-  end
-
-  # GET /tracks/1/edit
-  def edit
-    @track = Track.find(params[:id])
-  end
-
-  # POST /tracks
-  def create
-    @track = Track.new(params[:track])
-    flash[:notice] = "Track was successfully created." if @track.save
-    respond_with @track
-  end
-
-  # PUT /tracks/1
   def update
-
     #TODO figure out why :track doesn't have rating
     params[:track][:rating] = params[:rating]
 
     respond_with Track.update(params[:id], params[:track])
   end
 
-  # DELETE /tracks/1
+  #TODO: decide what this should do. Delete the media file?
   def destroy
-    @track = Track.find(params[:id])
-    @track.destroy
-
-    respond_with @track
   end
 
 private

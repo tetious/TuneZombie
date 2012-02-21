@@ -18,4 +18,12 @@ class Artist < ActiveRecord::Base
   has_many :tracks
   has_many :composed_tracks, :class_name => "Track"
   validates :name, :presence => true
+
+  def album_name
+    self.tracks.first.album.name
+  end
+
+  def as_json(options={})
+    super(options.merge(:include => {:tracks => {:methods => :rating}}, :methods => :album_name))
+  end
 end
