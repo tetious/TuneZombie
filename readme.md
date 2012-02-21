@@ -1,12 +1,12 @@
 TuneZombie
 ==========
 
+TuneZombie is a open source Ruby on Rails based music server.
+
 TuneZombie eats your tunes. It will not yet read your runes.  
 It matters not, as we don't care. Reading runes would not be fair.
 
 *Tilverton lives!*
-
-TuneZombie is a open source Ruby on Rails based music server. 
 
 Usage
 =====
