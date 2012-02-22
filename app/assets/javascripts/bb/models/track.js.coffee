@@ -55,3 +55,4 @@ class App.Models.Track extends Backbone.Model
 class App.Models.Tracks extends Backbone.QueryCollection
   url: '/tracks'
   model: App.Models.Track
+  comparator: (track) -> track.get("number")

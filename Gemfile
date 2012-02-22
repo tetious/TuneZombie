@@ -42,7 +42,7 @@ gem 'ejs', '~> 1.0.0'
 gem 'eco', '~> 1.0.0'
 
 group :test, :development do
-  gem 'jasmine-rails', :git => 'https://github.com/peterlind/jasmine-rails.git'
+  gem "jasminerice"
   gem "rspec-rails"
 end
 

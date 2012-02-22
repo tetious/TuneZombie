@@ -21,6 +21,9 @@ window.App =
     @playerView = new App.Views.PlayerView model: @player, el: $("#jquery_jplayer_1")
     @player.bindEvents()
 
+    @playerPlaylist = new App.PlayerPlaylist
+    @playerPlaylist.useCollection(@albums)
+
     @user_id = $("body").data("user-id")
 
     @layout = $('#app').layout (

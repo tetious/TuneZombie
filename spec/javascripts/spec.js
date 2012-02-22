@@ -20,5 +20,6 @@
 //= require bootstrap
 //= require jquery.layout
 //= require app
-//= require_tree ../templates
+//= require_tree ../../app/assets/javascripts
+//= require_tree ../../app/assets/templates
 //= require_tree .

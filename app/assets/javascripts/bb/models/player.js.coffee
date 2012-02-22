@@ -5,38 +5,34 @@ class App.Models.Player extends Backbone.Model
     App.playerView.on("stopped", @markStopped, this)
     App.playerView.on("ended", @markStopped, this)
 
-#  prev: -> #TODO: FIX THIS
-#    idx = @playlist.indexOf(@current.id) - 1
-#
-#    if idx < 0
-#      0
-#    else
-#      @playlist[idx]
-#
-#  next: -> #TODO: FIX THIS
-#    idx = @playlist.indexOf(@current.id) + 1
-#
-#    if idx > @playlist.length - 1
-#      0
-#    else
-#      @playlist[idx]
-
   markPlaying: ->
     @track.markPlaying()
 
   markStopped: ->
     @track.markStopped()
 
-  albumName: -> @track.albumName
-  name: -> @track.get("name")
-  media: -> @track.media()
-  timeTick: (time) -> @track.timeTick(time)
-  fileExt: -> @track.get("file_ext")
-  rating: -> @track.get("rating")
-  playing: -> @track.playing
+  next: =>
+    @play App.playerPlaylist.next(@track.id)
+
+  prev: =>
+    @play App.playerPlaylist.prev(@track.id)
+
+  change: ->
+    @trigger("change")
+
+  setRating: (e) =>
+    @track.setRating(e)
 
   play: (track) ->
-    @track = track
-    @trigger("new_track")
+    if(!track)
+      return
+      
+    if @track and @track.playing
+      @markStopped()
+    if @track
+      @track.off("change", @change)
 
+    @track = track
+    track.on("change", @change, this)
+    @trigger("new_track")
 
