@@ -1,0 +1,1 @@
+class App.Models.PlayerPlaylist extends Backbone.QueryCollection

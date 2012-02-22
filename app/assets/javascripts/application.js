@@ -16,6 +16,7 @@
 //= require underscore
 //= require json2
 //= require backbone
+//= require backbone-query
 //= require bootstrap
 //= require jquery.layout
 //= require app

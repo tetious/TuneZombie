@@ -10,13 +10,13 @@ class App.Models.Track extends Backbone.Model
     else
       "/tracks"
 
-  markPlaying: ->
-    @trigger("play")
+  markPlaying: =>
+    @trigger('playing')
     @playing = true
 
-  markStopped: ->
+  markStopped: =>
     if @playing
-      @trigger("stop")
+      @trigger('stopped')
       @playing = false
       tp = new App.Models.TrackPlays
       tp.create(user_id: App.user_id, track_id: @id, played_time: @timePlayed)
@@ -24,7 +24,7 @@ class App.Models.Track extends Backbone.Model
       @time = 0
       @timePlayed = 0
 
-  setRating: (e) ->
+  setRating: (e) =>
     if e.offsetX
       offX = e.offsetX
     else
@@ -36,42 +36,22 @@ class App.Models.Track extends Backbone.Model
     @set("rating", newRating)
     @save()
 
-  timeTick: (time) ->
+  timeTick: (time) =>
     if @time < time # if we've moved forward in time
       @timePlayed += time - @time
 
     @time = time
     console.log ("currentTime: #{time} timePlayed: #{@timePlayed}")
 
-  albumName: ->
+  albumName: =>
     @album ||= App.albums.get(@get("album_id"))
     @album.get("name")
 
-  media: ->
+  media: =>
     tmp = {}
     tmp[@get("file_ext")] = "/tracks/#{@id}"
     tmp
 
-class App.Models.Tracks extends Backbone.Collection
+class App.Models.Tracks extends Backbone.QueryCollection
   url: '/tracks'
   model: App.Models.Track
-
-class App.Models.Album extends Backbone.Model
-
-  initialize: ->
-    @tracks = new App.Models.Tracks()
-    #@on("change", @fillTracks, this)
-    @tracks.reset(@get("tracks"))
-
-  #fillTracks: ->
-  #  @tracks.reset(@get("tracks"))
-
-class App.Models.Albums extends Backbone.Collection
-  url: '/albums'
-  model: App.Models.Album
-
-class App.Models.Artists extends Backbone.Collection
-  url: '/artists'
-
-class App.Models.TrackPlays extends Backbone.Collection
-  url: '/track_plays'

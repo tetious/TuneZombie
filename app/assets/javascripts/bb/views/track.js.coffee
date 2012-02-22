@@ -56,26 +56,25 @@ class App.Views.TrackListItem extends Backbone.View
   template: JST["track/track"]
   tagName: 'tr'
   events:
-    'dblclick': 'play'
+    'dblclick': 'triggerPlay'
     'click .track_rating': 'updateRating'
 
   initialize: ->
     console.log("TrackListItem.initialize")
-    @model.on('play', @rowPlay, this)
-    @model.on('stop', @rowStop, this)
+    @model.on('playing', @markRowPlaying, this)
+    @model.on('stopped', @markRowStopped, this)
     @model.on('change', @render, this)
 
-  play: ->
-    @view = new App.Views.PlayerView model: @model
+  triggerPlay: ->
     App.player.play(@model)
 
   updateRating: (e) ->
     @model.setRating(e)
 
-  rowPlay: ->
+  markRowPlaying: ->
     $(@el).addClass("row_playing")
 
-  rowStop: ->
+  markRowStopped: ->
     $(@el).removeClass("row_playing")
 
   render: ->
