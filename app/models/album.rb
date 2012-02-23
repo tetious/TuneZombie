@@ -22,8 +22,7 @@ class Album < ActiveRecord::Base
 
   def art_url
     "#{MUSIC_FOLDER}/.__TZAlbumArt__/%s.%s" %
-        [self.name.space_to_underscore.sanitize_for_filename || '__nil__',
-         self.art_type || '']
+        [self.id, self.art_type || '']
   end
 
   def artist_name
