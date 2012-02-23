@@ -4,6 +4,7 @@ class App.Models.Player extends Backbone.Model
     App.playerView.on("playing", @markPlaying, this)
     App.playerView.on("stopped", @markStopped, this)
     App.playerView.on("ended", @markStopped, this)
+    App.playerView.on("ended", @next, this)
 
   markPlaying: ->
     @track.markPlaying()
