@@ -31,7 +31,7 @@ class Album < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(:include => {:tracks => {:methods => [:rating, :file_ext]}},
+    super(options.merge(:include => {:tracks => {:methods => [:rating, :file_ext, :time]}},
                         :methods => :artist_name))
   end
 end
