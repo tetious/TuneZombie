@@ -9,20 +9,25 @@ window.App =
 
   init: ->
 
+    @allAlbums = new App.Models.Albums
+    
+#    @allArtists = new App.Models.Artists
+#    @allArtists.fetch()
+
     @albums = new App.Models.Albums
+    @albums.fetch success: (collection) => @allAlbums.reset collection.models 
     @albumsList = new App.Views.AlbumList collection: @albums
     @albumBoxList = new App.Views.AlbumBoxList collection: @albums
-    @albums.fetch()
-
-    @artists = new App.Models.Artists
-    @artists.fetch()
-
+    
     @player = new App.Models.Player
     @playerView = new App.Views.PlayerView model: @player, el: $("#jquery_jplayer_1")
     @player.bindEvents()
 
     @playerPlaylist = new App.PlayerPlaylist
     @playerPlaylist.useCollection(@albums)
+
+    $("#search-box").keyup =>
+      @albums.reset @allAlbums.query name: {$likeI: $("#search-box").val() }
 
     @user_id = $("body").data("user-id")
 

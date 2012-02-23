@@ -7,7 +7,7 @@ class MusicController < ApplicationController
     if User.current
       respond_with Album.order(:name)
     else
-      redirect_to user_path
+      redirect_to users_path
     end
   end
 end

@@ -5,6 +5,7 @@ class App.Views.AlbumBoxList extends Backbone.View
     @collection.on('add', @appendItem, this)
 
   render: ->
+    $("#album-box-list").empty()
     @collection.each @appendItem
     this
 
