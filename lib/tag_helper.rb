@@ -79,22 +79,25 @@ class TagMp3
 
   def save_art_to_path(path)
     if @tag.id3v2_tag.frame_list('APIC').first.nil?
+      puts "No APIC tag found."
       return nil
     else
       apic = @tag.id3v2_tag.frame_list('APIC').first
 
       case apic.mime_type
-        when 'image/jpg'
+        when 'image/jpeg'
           @art_type = 'jpg'
           path += 'jpg'
         when 'image/png'
           @art_type = 'png'
           path += 'png'
         else
+          puts "Invalid mime type."
           return nil
       end
     end
 
+    puts "Saving art to path: #{path}"
     fil = File.open(path, "wb")
     fil.write(apic.picture)
     fil.close
