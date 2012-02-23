@@ -46,7 +46,7 @@ private
         file_end = match[2].to_i unless match[2].empty?
         logger.debug "Range: file_begin: #{file_begin} file_end: #{file_end}"
       end
-      response.header["Content-Range"] = "bytes #{file_begin}-#{file_end}/#{file_size}"
+      response.header["Content-Range"] = "bytes #{file_begin + 1}-#{file_end + 1}/#{file_size}"
     else
       status_code = "200 OK"
     end
@@ -56,7 +56,7 @@ private
     response.header["Accept-Ranges"]=  "bytes" # This fixes ranges with Chrome
     response.header["Content-Transfer-Encoding"] = "binary"
 
-    send_data(binread(track.file_path, file_end - file_begin, file_begin),
+    send_data(binread(track.file_path, nil, file_begin),
               :filename => track.filename,
               :disposition => "inline",
               :status => status_code,
