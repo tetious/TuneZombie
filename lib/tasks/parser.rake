@@ -31,12 +31,13 @@ Loads media into the TuneZombie database.
     source_path = env_or_setting('source_path')
     dest_path = env_or_setting('dest_path')
     itunes_xml_path = env_or_setting('itunes_xml_path')
+    move_files = env_or_setting('move_files')
 
     if import_user.blank? || source_path.blank? || dest_path.blank?
       puts "Please provide a value for source_path, dest_path and user."
     else
       c = Crawler.new(username: import_user, path_to_search: source_path,
-                      dest_path: dest_path,  itml_file: itunes_xml_path)
+                      dest_path: dest_path,  itml_file: itunes_xml_path, move_files: move_files)
       c.crawl
     end
   end
@@ -44,7 +45,7 @@ Loads media into the TuneZombie database.
 private
 
   def env_or_setting(key)
-    ENV[key].blank? ? Settings.find_by_key(key).value: ENV[key]
+    ENV[key].blank? ? Settings.find_by_key(key).try(:value) : ENV[key]
   end
 
 

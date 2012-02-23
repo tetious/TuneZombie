@@ -46,30 +46,30 @@ class Crawler
     if files_to_process.count > 0
       # load the library file
 
-      puts("CRAWL: [%s] files to process this run." % files_to_process.count)
-      puts("CRAWL: Loading iTunes library file. (This may take a while.)")
+      puts "CRAWL: [#{files_to_process.count}] files to process this run." 
+      puts "CRAWL: Loading iTunes library file. (This may take a while.)"
       ml.load(@itml_file)
-      puts("CRAWL: iTunes library file loaded.")
+      puts "CRAWL: iTunes library file loaded."
 
       files_to_process.each do |fil|
-        puts("CRAWL: Attempting to add file [%s]" % fil)
+        puts "CRAWL: Attempting to add file [#{fil}]"
         b_fil = ml.clean_filename(fil)
         # see if we can find track data for it
         key = ml.library.keys.select { |f| f.start_with?(b_fil) } #TODO: check to see if start_with is valid
         if key.count == 1
           # hooray
           track = add_track_with_itunes_data(fil, ml.library[key[0]])
-          puts("[%s]: Track added!" % b_fil)
+          puts "[#{b_fil}]: Track added!"
         elsif key.count == 0
-          puts("[%s]: could not find in library." % b_fil)
+          puts "[#{b_fil}]: could not find in library."
           #TODO fallback to taglib
           return
         elsif key.count > 1
-          puts("[%s]: found more than once in library." % b_fil)
+          puts "[#{b_fil}]: found more than once in library."
           #TODO fallback to taglib to find best match in library
           return
         end
-        move_file_based_on_metadata(fil, @dest_path, track)
+        move_file_based_on_metadata(fil, track)
 
       end
     else
@@ -91,19 +91,16 @@ class Crawler
     file_h.to_s
   end
 
-  def move_file_based_on_metadata(fil, dest_path, track)
-    full_dest_path = File.join(dest_path, track.file_path)
-
-    FileUtils.mkpath(File.dirname(full_dest_path))
+  def move_file_based_on_metadata(fil, track)
+    FileUtils.mkpath(File.dirname(track.file_path))
     if @move_files
-      puts("CRAWL: Moving file to [%s]." % full_dest_path)
-      File.rename(fil, full_dest_path)
+      puts "CRAWL: Moving file to #{track.file_path}."
+      FileUtils.move(fil, track.file_path)
     else # copy
-      puts("CRAWL: Copying file to [%s]." % full_dest_path)
-      FileUtils.copy(fil, full_dest_path)
+      puts "CRAWL: Copying file to #{track.file_path}."
+      FileUtils.copy(fil, track.file_path)
     end
-
-    end
+  end
 
   def map_track_from_itl(db_track, itunes_track)
     db_track.comments = itunes_track[:comments]
@@ -146,7 +143,7 @@ class Crawler
         play.save
       end
     else
-      puts("ATWID: Track already present, skipping track_plays gen.")
+      puts "ATWID: Track already present, skipping track_plays gen."
     end
 
     # set/add album
@@ -158,7 +155,7 @@ class Crawler
         t_path = tag.save_art_to_path(album.art_url)
         album.art_type = tag.art_type
         album.save
-        puts("ATWID: Art saved!")
+        puts "ATWID: Art saved!"
       end
 
       db_track.album = album
