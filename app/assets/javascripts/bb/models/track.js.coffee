@@ -52,7 +52,10 @@ class App.Models.Track extends Backbone.Model
     tmp[@get("file_ext")] = "/tracks/#{@id}"
     tmp
 
+  disc: ->
+    if @get("disc")? then parseInt @get("disc") else 0
+
 class App.Models.Tracks extends Backbone.QueryCollection
   url: '/tracks'
   model: App.Models.Track
-  comparator: (track) -> track.get("number")
+  comparator: (track) -> parseInt(track.disc() * 1000 + track.get("number"))
