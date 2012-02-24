@@ -85,14 +85,14 @@ class TagMp3
       apic = @tag.id3v2_tag.frame_list('APIC').first
 
       case apic.mime_type
-        when 'image/jpeg'
+        when 'image/jpeg', 'image/jpg'
           @art_type = 'jpg'
           path += 'jpg'
         when 'image/png'
           @art_type = 'png'
           path += 'png'
         else
-          puts "Invalid mime type."
+          puts "Invalid mime type: #{apic.mime_type}"
           return nil
       end
     end
