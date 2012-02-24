@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'URI'
+require 'uri'
 require 'helper_patches'
 
 class MusicLibrary

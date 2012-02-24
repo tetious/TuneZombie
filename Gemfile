@@ -52,3 +52,6 @@ group :test do
   gem "guard-rspec"
 end
 
+group :production do 
+  gem 'therubyracer'
+end 
