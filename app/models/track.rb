@@ -19,7 +19,10 @@ class Track < ActiveRecord::Base
   belongs_to :composer, :class_name => "Artist"
   belongs_to :genre
   belongs_to :album
-  has_many :track_plays, dependent: :destroy
+  has_many :track_plays, :dependent => :destroy
+  has_one :track_metadata, :dependent => :destroy
+
+  default_scope { includes(:track_metadata).where{track_metadata.user_id == User.current} }
 
   def file_path
 
@@ -43,14 +46,12 @@ class Track < ActiveRecord::Base
   end
 
   def rating
-    metadata = TrackMetadata.find_or_create_by_user_and_track(User.current, self)
-    metadata.rating
+    track_metadata.rating
   end
 
   def rating=(value)
-    tm = TrackMetadata.find_or_create_by_user_and_track(User.current, self)
-    tm.rating = value
-    tm.save
+    track_metadata.rating = value
+    track_metadata.save
   end
 
   def album_name
@@ -71,7 +72,7 @@ class Track < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options.merge(methods: [:file_ext, :rating, :time]))
+    super(options.merge(methods: [:file_ext, :rating, :time], includes: [:track_metadata]))
   end
 
   validates :name, :filename, :presence => true
