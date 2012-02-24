@@ -13,12 +13,13 @@
 //= require jquery
 //= require jquery.jplayer
 //= require jquery-ui
+//= require jquery.multi-accordion
+//= require jquery.layout
 //= require underscore
 //= require json2
 //= require backbone
 //= require backbone-query
 //= require bootstrap
-//= require jquery.layout
 //= require app
 //= require_tree ../templates
 //= require_tree .

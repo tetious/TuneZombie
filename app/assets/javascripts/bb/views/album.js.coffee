@@ -7,7 +7,7 @@ class App.Views.AlbumList extends Backbone.View
 
   render: ->
     $(@el).empty()
-    #@appendItem new App.Models.Album id: -1, name: "All"
+    @appendItem new App.Models.Album id: -1, name: "All"
     @collection.each @appendItem
     this
 

@@ -41,7 +41,12 @@ window.App =
     )
     @layout.allowOverflow('north')
 
-    $("#left-accordion").accordion icons:false, autoHeight: false
+    $("#left-accordion").multiAccordion active: [0,1]
+    
+
+    $(window).resize ->
+      $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
+
     $("#jp_container_1").css left: "#{($(document).width() / 2) - 240 }px"
 
 App.Helper = Helper
