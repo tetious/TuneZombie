@@ -55,6 +55,7 @@ class App.Views.PlayerView extends Backbone.View
           @model.track.timeTick(e.jPlayer.status.currentTime)
 
       swfPath: "/assets"
+      solution: "flash, html"
       supplied: @model.track.get("file_ext")
     )
 
