@@ -36,7 +36,7 @@ class Crawler
   end
 
   #noinspection RubyScope
-  def crawl()
+  def crawl
     ml = MusicLibrary.new
 
     # first, see if there is any work to do
@@ -52,6 +52,7 @@ class Crawler
       puts "CRAWL: iTunes library file loaded."
 
       files_to_process.each do |fil|
+        track = nil
         puts "CRAWL: Attempting to add file [#{fil}]"
         b_fil = ml.clean_filename(fil)
         # see if we can find track data for it
@@ -59,17 +60,32 @@ class Crawler
         if key.count == 1
           # hooray
           track = add_track_with_itunes_data(fil, ml.library[key[0]])
-          puts "[#{b_fil}]: Track added!"
         elsif key.count == 0
           puts "[#{b_fil}]: could not find in library."
           #TODO fallback to taglib
-          return
         elsif key.count > 1
-          puts "[#{b_fil}]: found more than once in library."
-          #TODO fallback to taglib to find best match in library
-          return
+          puts "[#{b_fil}]: found #{key.count} times in library, trying to use tag to narrow it down."
+
+          tag = TagHelper.create(fil)
+          matched_tracks = key.map { |k| ml.library[k] }
+
+          puts "Tag artist_name: #{tag.artist_name}."
+          puts "Matched artist names: #{matched_tracks.map { |t| t[:artist]}.join ', '}."
+          
+          library_track = matched_tracks.select { |t| t[:artist] == tag.artist_name }
+          puts "Rematched count is #{library_track.count}."
+          if library_track.count == 1
+            track = add_track_with_itunes_data(fil, library_track.first)
+          end
+
         end
-        move_file_based_on_metadata(fil, track)
+
+        if track.nil?
+          puts "[#{b_fil}]: Skipping track."
+        else
+          move_file_based_on_metadata(fil, track)
+          puts "[#{b_fil}]: Track added!"
+        end
 
       end
     else

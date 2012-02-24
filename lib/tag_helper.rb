@@ -34,6 +34,10 @@ class TagM4a
 
     self
   end
+  
+  def artist_name
+    @tag.ART || ""
+  end
 
   def save_art_to_path(path)
     if @tag.COVR.nil?
@@ -75,6 +79,14 @@ class TagMp3
   def load
     @tag = TagLib::MPEG::File.new(@filename)
     self
+  end
+
+  def artist_name
+    @tag.id3v2_tag.artist
+  end
+
+  def album_name
+    @tag.id3v2_tag.album
   end
 
   def save_art_to_path(path)
