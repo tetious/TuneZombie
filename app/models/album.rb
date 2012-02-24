@@ -21,7 +21,7 @@ class Album < ActiveRecord::Base
   searchable_columns name: 'n'
 
   def art_url
-    "#{MUSIC_FOLDER}/.__TZAlbumArt__/%s.%s" %
+    "#{Settings.music_folder}/.__TZAlbumArt__/%s.%s" %
         [self.id, self.art_type || '']
   end
 

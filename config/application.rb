@@ -64,5 +64,3 @@ module TuneZombie
 
   end
 end
-
-MUSIC_FOLDER = '/Volumes/Big/TuneZombie/Music'
