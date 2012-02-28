@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/YenTheFirst/ruby-mp4info.git
+  revision: 9399d0d814c88a7988e32d5d32a076ee48b8f72a
+  specs:
+    mp4info (1.7.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -40,6 +46,8 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.1)
       ffi (~> 1.0.6)
+    chronic_duration (0.9.6)
+      numerizer (~> 0.1.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -85,9 +93,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
-    mp4info (1.7.3)
     multi_json (1.1.0)
     nokogiri (1.5.0)
+    numerizer (0.1.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -170,6 +178,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capybara
+  chronic_duration
   coffee-rails (~> 3.2.0)
   eco (~> 1.0.0)
   ejs (~> 1.0.0)
@@ -177,7 +186,7 @@ DEPENDENCIES
   guard-rspec
   jasminerice
   jquery-rails
-  mp4info
+  mp4info!
   rails (= 3.2.0)
   rspec-rails
   sass-rails (~> 3.2.3)

@@ -35,8 +35,10 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "taglib-ruby"
-gem "mp4info"
+gem "mp4info", git: 'https://github.com/YenTheFirst/ruby-mp4info.git'
 gem "squeel"
+
+gem "chronic_duration"
 
 gem 'ejs', '~> 1.0.0'
 gem 'eco', '~> 1.0.0'

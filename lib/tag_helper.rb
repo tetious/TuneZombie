@@ -16,6 +16,7 @@
 
 require 'mp4info'
 require 'taglib'
+require 'chronic_duration'
 
 class TagM4a
 
@@ -34,9 +35,37 @@ class TagM4a
 
     self
   end
-  
-  def artist_name
-    @tag.ART || ""
+
+  def disc
+    @tag.DISK.try(:first)
+  end
+
+  def composer
+    @tag.WRT
+  end
+
+  def genre
+    @tag.GNRE
+  end
+
+  def number
+    @tag.TRKN.try(:first)
+  end
+
+  def track
+    @tag.NAM
+  end
+
+  def length
+    ChronicDuration::parse(@tag.TIME)
+  end 
+
+  def artist
+    @tag.ART
+  end
+
+  def album
+    @tag.ALB
   end
 
   def save_art_to_path(path)
@@ -77,24 +106,51 @@ class TagMp3
   end
 
   def load
-    @tag = TagLib::MPEG::File.new(@filename)
+    @file = TagLib::MPEG::File.new(@filename)
+    @tag = @file.id3v2_tag
     self
   end
 
-  def artist_name
-    @tag.id3v2_tag.artist
+  def disc # looks like this "1/5"
+    disc = @tag.frame_list('TPOS').first.to_s.split("/").first.to_i
+    disc == 0 ? nil : disc
   end
 
-  def album_name
-    @tag.id3v2_tag.album
+  def composer
+    composer = @tag.frame_list('TCOM').first.to_s
+    composer == "" ? nil : composer
+  end
+
+  def genre
+    @tag.genre == "" ? nil : @tag.genre
+  end
+
+  def track
+    @tag.title == "" ? nil : @tag.title
+  end
+
+  def number
+    @tag.track == 0 ? nil : @tag.track
+  end
+  
+  def length
+    @file.audio_properties.length
+  end 
+
+  def artist
+    @tag.artist
+  end
+
+  def album
+    @tag.album
   end
 
   def save_art_to_path(path)
-    if @tag.id3v2_tag.frame_list('APIC').first.nil?
+    if @tag.frame_list('APIC').first.nil?
       puts "No APIC tag found."
       return nil
     else
-      apic = @tag.id3v2_tag.frame_list('APIC').first
+      apic = @tag.frame_list('APIC').first
 
       case apic.mime_type
         when 'image/jpeg', 'image/jpg'

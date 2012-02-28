@@ -69,10 +69,10 @@ class Crawler
           tag = TagHelper.create(fil)
           matched_tracks = key.map { |k| ml.library[k] }
 
-          puts "Tag artist_name: #{tag.artist_name}."
+          puts "Tag artist: #{tag.artist}."
           puts "Matched artist names: #{matched_tracks.map { |t| t[:artist]}.join ', '}."
           
-          library_track = matched_tracks.select { |t| t[:artist] == tag.artist_name }
+          library_track = matched_tracks.select { |t| t[:artist] == tag.artist }
           puts "Rematched count is #{library_track.count}."
           if library_track.count == 1
             track = add_track_with_itunes_data(fil, library_track.first)

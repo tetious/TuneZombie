@@ -15,45 +15,134 @@
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
 require "tag_helper"
+require 'spec_helper'
 
 files_path = "#{::Rails.root}/spec/files"
 tmp_path = "#{::Rails.root}/tmp"
 
 describe TagHelper do
 
-  it "should save art file for m4a" do
-    th = TagHelper.create(files_path + '/re_your_brains_png_m4a.m4a')
-    tmp_art = tmp_path + '/re_brains_m4a.'
-    tmp_art = th.save_art_to_path(tmp_art)
-    tmp_art.should == tmp_path + '/re_brains_m4a.png'
-    File.size(tmp_art).should be > 0
+  describe "tags okay" do
+    before(:all) do
+      @tag_mp3 = TagHelper.create(files_path + '/re_your_brains_png_mp3.mp3')
+      @tag_m4a = TagHelper.create(files_path + '/re_your_brains_png_m4a.m4a')
+    end
 
-    File.delete(tmp_art)
+    it "should parse artist name" do
+      @tag_mp3.artist.should == "Test Artist"
+      @tag_m4a.artist.should == "Test Artist"
+    end
+
+    it "should parse album name" do
+      @tag_mp3.album.should == "Test Album"
+      @tag_m4a.album.should == "Test Album"
+    end
+
+    it "should parse track name" do
+      @tag_mp3.track.should == "re_your_brains_png_mp3"
+      @tag_m4a.track.should == "re_your_brains_png_m4a"
+    end
+
+    it "should parse track number" do
+      @tag_mp3.number.should == 5
+      @tag_m4a.number.should == 5
+    end
+
+    it "should parse disc number" do
+      @tag_mp3.disc.should == 5
+      @tag_m4a.disc.should == 5
+    end
+
+    it "should parse composer" do
+      @tag_mp3.composer.should == "Test Composer"
+      @tag_m4a.composer.should == "Test Composer"
+    end
+
+    it "should parse genre" do
+      @tag_mp3.genre.should == "Soundtrack"
+      @tag_m4a.genre.should == "Soundtrack"
+    end
+
+    it "should parse length" do
+      @tag_mp3.length.should == 12
+      @tag_m4a.length.should == 12
+    end
+
   end
 
-  it "should save art file for mp3" do
-    th = TagHelper.create(files_path + '/re_your_brains_png_mp3.mp3')
-    tmp_art = tmp_path + '/re_brains_mp3.'
-    tmp_art = th.save_art_to_path(tmp_art)
-    tmp_art.should == tmp_path + '/re_brains_mp3.png'
-    File.size(tmp_art).should be > 0
+  describe "tags missing" do
+    before(:all) do
+      @tag_mp3 = TagHelper.create(files_path + '/re_your_brains_none_mp3.mp3')
+      @tag_m4a = TagHelper.create(files_path + '/re_your_brains_none_m4a.m4a')
+    end
 
-    File.delete(tmp_art)
+    it "should parse empty artist name" do
+      @tag_mp3.artist.should be_nil
+      @tag_m4a.artist.should be_nil
+    end
+
+    it "should parse empty album name" do
+      @tag_mp3.album.should be_nil
+      @tag_m4a.album.should be_nil
+    end
+
+    it "should parse empty track number" do
+      @tag_mp3.number.should be_nil
+      @tag_m4a.number.should be_nil
+    end
+
+    it "should parse empty disc number" do
+      @tag_mp3.disc.should be_nil
+      @tag_m4a.disc.should be_nil
+    end
+
+    it "should parse empty composer" do
+      @tag_mp3.composer.should be_nil
+      @tag_m4a.composer.should be_nil
+    end
+
+    it "should parse empty genre" do
+      @tag_mp3.genre.should be_nil
+      @tag_m4a.genre.should be_nil
+    end
+
   end
 
-  it "should not save art file if no art is attached, m4a" do
-    th = TagHelper.create(files_path + '/re_your_brains_none_m4a.m4a')
-    tmp_art = tmp_path + '/re_brains_n_m4a.'
-    tmp_art = th.save_art_to_path(tmp_art)
-    tmp_art.should be_nil
-  end
 
-  it "should not save art file if no art is attached, mp3" do
-    th = TagHelper.create(files_path + '/re_your_brains_none_mp3.mp3')
-    tmp_art = tmp_path + '/re_brains_n_mp3.'
-    tmp_art = th.save_art_to_path(tmp_art)
-    tmp_art.should be_nil
-  end
+  describe "art" do   
+    it "should save art file for m4a" do
+      th = TagHelper.create(files_path + '/re_your_brains_png_m4a.m4a')
+      tmp_art = tmp_path + '/re_brains_m4a.'
+      tmp_art = th.save_art_to_path(tmp_art)
+      tmp_art.should == tmp_path + '/re_brains_m4a.png'
+      File.size(tmp_art).should be > 0
 
+      File.delete(tmp_art)
+    end
+
+    it "should save art file for mp3" do
+      th = TagHelper.create(files_path + '/re_your_brains_png_mp3.mp3')
+      tmp_art = tmp_path + '/re_brains_mp3.'
+      tmp_art = th.save_art_to_path(tmp_art)
+      tmp_art.should == tmp_path + '/re_brains_mp3.png'
+      File.size(tmp_art).should be > 0
+
+      File.delete(tmp_art)
+    end
+
+    it "should not save art file if no art is attached, m4a" do
+      th = TagHelper.create(files_path + '/re_your_brains_none_m4a.m4a')
+      tmp_art = tmp_path + '/re_brains_n_m4a.'
+      tmp_art = th.save_art_to_path(tmp_art)
+      tmp_art.should be_nil
+    end
+
+    it "should not save art file if no art is attached, mp3" do
+      th = TagHelper.create(files_path + '/re_your_brains_none_mp3.mp3')
+      tmp_art = tmp_path + '/re_brains_n_mp3.'
+      tmp_art = th.save_art_to_path(tmp_art)
+      tmp_art.should be_nil
+    end
+  end
 
 end
