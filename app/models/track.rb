@@ -21,8 +21,9 @@ class Track < ActiveRecord::Base
   belongs_to :album
   has_many :track_plays, :dependent => :destroy
   has_one :track_metadata, :dependent => :destroy
+  validates :name, :filename, :presence => true
 
-  default_scope { includes(:track_metadata).where{track_metadata.user_id == User.current} }
+  default_scope lambda { includes(:track_metadata).where { track_metadata.user_id == User.current } }
 
   def file_path
 
@@ -75,5 +76,19 @@ class Track < ActiveRecord::Base
     super(options.merge(methods: [:file_ext, :rating, :time], includes: [:track_metadata]))
   end
 
-  validates :name, :filename, :presence => true
+  def self.track_from_file(fil)
+    hash = Track.hash_file fil
+    Track.find_or_create_by_file_hash hash
+  end
+
+  def self.hash_file(file_name)
+    file_h = Digest::SHA2.new
+    File.open(file_name, 'r') do |fh|
+      while buffer = fh.read(1024)
+        file_h << buffer
+      end
+    end
+    file_h.to_s
+  end
+
 end

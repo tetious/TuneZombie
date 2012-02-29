@@ -29,10 +29,8 @@ class Crawler
 
     FileUtils.mkpath(File.join(@dest_path, '.__TZAlbumArt__'))
 
-    @user = User.find_by_name options[:username]
-    if @user.nil?
-      raise "User not found!"
-    end
+    User.current = options[:username]
+    raise "User not found!" if User.current.nil?
   end
 
   #noinspection RubyScope
@@ -56,28 +54,23 @@ class Crawler
         puts "CRAWL: Attempting to add file [#{fil}]"
         b_fil = ml.clean_filename(fil)
         # see if we can find track data for it
-        key = ml.library.keys.select { |f| f.start_with?(b_fil) } #TODO: check to see if start_with is valid
-        if key.count == 1
-          # hooray
-          track = add_track_with_itunes_data(fil, ml.library[key[0]])
+        key = ml.library.keys.select { |f| f.start_with?(b_fil) }
+        tag = TagHelper.create(fil)
+        if key.count >= 1
+          matched_tracks = key.map { |k| ml.library[k] }
+          library_track = matched_tracks.select { |t| t[:artist] == tag.artist and t[:album] == tag.album }
+
+          if library_track.count == 1 # after limiting by artist and album, we have a match!
+            track = add_track_with_itunes_data(fil, library_track.first)
+          elsif library_track.count > 1 # after limiting, we still have more than one match.
+            puts "[#{b_fil}]: found #{library_track.count} times in iTunes library."
+          elsif library_track.count == 0 # no matches after filtering
+            puts "[#{b_fil}]: could not find in library after filtering."
+            track = add_track_with_tag_data(fil, tag)
+          end
         elsif key.count == 0
           puts "[#{b_fil}]: could not find in library."
-          #TODO fallback to taglib
-        elsif key.count > 1
-          puts "[#{b_fil}]: found #{key.count} times in library, trying to use tag to narrow it down."
-
-          tag = TagHelper.create(fil)
-          matched_tracks = key.map { |k| ml.library[k] }
-
-          puts "Tag artist: #{tag.artist}."
-          puts "Matched artist names: #{matched_tracks.map { |t| t[:artist]}.join ', '}."
-          
-          library_track = matched_tracks.select { |t| t[:artist] == tag.artist }
-          puts "Rematched count is #{library_track.count}."
-          if library_track.count == 1
-            track = add_track_with_itunes_data(fil, library_track.first)
-          end
-
+          track = add_track_with_tag_data(fil, tag)
         end
 
         if track.nil?
@@ -96,16 +89,6 @@ class Crawler
   end
 
   private
-
-  def hash_file(file_name)
-    file_h = Digest::SHA2.new
-    File.open(file_name, 'r') do |fh|
-      while buffer = fh.read(1024)
-        file_h << buffer
-      end
-    end
-    file_h.to_s
-  end
 
   def move_file_based_on_metadata(fil, track)
     FileUtils.mkpath(File.dirname(track.file_path))
@@ -131,11 +114,55 @@ class Crawler
     db_track
 
   end
-  
-  def add_track_with_itunes_data(fil, itunes_track)
-    file_hash = hash_file(fil)
 
-    db_track = Track.find_or_create_by_file_hash(file_hash)
+  def map_track_from_tag(db_track, tag)
+    db_track.date_added = DateTime.now
+    db_track.disc = tag.disc
+    db_track.name = tag.track
+    db_track.number = tag.number
+    db_track.track_type = tag.tag_type
+    db_track.length = tag.length
+
+    db_track
+  end
+
+  def get_album(options)
+    album = Album.find_or_create_by_name options[:album_name]
+
+    if album.new_record? or album.art_type.nil? # keep trying if the art isn't there
+      tag = options[:tag_helper] || TagHelper.create(options[:file])
+      album.art_type = tag.art_type
+      if album.art_url
+        tag.save_art_to_path(album.art_url)
+        album.save
+        puts "get_album: Art saved!"
+      end
+    end
+
+    album
+  end
+
+  def add_track_with_tag_data(fil, tag)
+    db_track = Track.track_from_file fil
+    map_track_from_tag(db_track, tag)
+    db_track.size = File.size(fil)
+    db_track.filename = File.basename(fil)
+    db_track.save
+
+    db_track.album = get_album album_name: tag.album, tag_helper: tag if tag.album
+    db_track.artist = Artist.find_or_create_by_name(tag.artist) if tag.artist
+    db_track.composer = Artist.find_or_create_by_name(tag.composer) if tag.composer 
+    db_track.genre = Genre.find_or_create_by_name(tag.genre) if tag.genre
+
+    tm = TrackMetadata.find_or_create_by_user_and_track(User.current, db_track)
+    tm.save
+
+    db_track.save
+    db_track
+  end
+
+  def add_track_with_itunes_data(fil, itunes_track)
+    db_track = Track.track_from_file fil
     new_track = db_track.new_record?
 
     map_track_from_itl(db_track, itunes_track)
@@ -143,60 +170,31 @@ class Crawler
 
     db_track.save
 
-    tm = TrackMetadata.find_or_create_by_user_and_track(@user, db_track)
+    tm = TrackMetadata.find_or_create_by_user_and_track(User.current, db_track)
 
     tm.play_count = itunes_track[:play_count] || 0
     tm.rating = (itunes_track[:rating].to_i || 0) / 20
     tm.skip_count = itunes_track[:skip_count] || 0
     tm.save
 
-    # add plays records
     if new_track
       tm.play_count.times do
         play = db_track.track_plays.create
-        play.user = @user
+        play.user = User.current
         play.played_at = itunes_track[:play_date_utc]
+        play.played_time = db_track.length
         play.save
       end
     else
       puts "ATWID: Track already present, skipping track_plays gen."
     end
 
-    # set/add album
-    if itunes_track.has_key?(:album)
-      album = Album.find_or_create_by_name(itunes_track[:album])
-
-      if album.new_record? || album.art_type.nil? # keep trying if the art isn't there
-        tag = TagHelper.create(fil)
-        t_path = tag.save_art_to_path(album.art_url)
-        album.art_type = tag.art_type
-        album.save
-        puts "ATWID: Art saved!"
-      end
-
-      db_track.album = album
-    end
-
-    # set/add artist
-    if itunes_track.has_key?(:artist)
-      artist = Artist.find_or_create_by_name(itunes_track[:artist])
-      db_track.artist = artist
-    end
-    # set/add composer
-    if itunes_track.has_key?(:composer)
-      composer = Artist.find_or_create_by_name(itunes_track[:composer])
-      db_track.composer = composer
-    end
-
-    # set/add genre
-    if itunes_track.has_key?(:genre)
-      genre = Genre.find_or_create_by_name(itunes_track[:genre])
-      db_track.genre = genre
-    end
+    db_track.album = get_album album_name: itunes_track[:album], file: fil if itunes_track.has_key?(:album)
+    db_track.artist = Artist.find_or_create_by_name(itunes_track[:artist]) if itunes_track.has_key?(:artist)
+    db_track.composer = Artist.find_or_create_by_name(itunes_track[:composer]) if itunes_track.has_key?(:composer)
+    db_track.genre = Genre.find_or_create_by_name(itunes_track[:genre]) if itunes_track.has_key?(:genre)
 
     db_track.save
-
     db_track
-
   end
 end

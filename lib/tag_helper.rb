@@ -68,28 +68,26 @@ class TagM4a
     @tag.ALB
   end
 
-  def save_art_to_path(path)
+  def art_type
     if @tag.COVR.nil?
-      return nil
+      nil
     else
       header = @tag.COVR[0..10]
       case
         when header.include?('JFIF')
-          @art_type = 'jpg'
-          path += 'jpg'
+          'jpg'
         when header.include?('PNG')
-          @art_type = 'png'
-          path += 'png'
+          'png'
         else
-          return nil
+          nil
       end
     end
+  end
 
+  def save_art_to_path(path)
     fil = File.open(path, "wb")
     fil.write(@tag.COVR)
     fil.close
-
-    path
   end
 end
 
@@ -145,32 +143,32 @@ class TagMp3
     @tag.album
   end
 
-  def save_art_to_path(path)
+  def art_type
     if @tag.frame_list('APIC').first.nil?
       puts "No APIC tag found."
-      return nil
+      nil
     else
       apic = @tag.frame_list('APIC').first
-
       case apic.mime_type
         when 'image/jpeg', 'image/jpg'
-          @art_type = 'jpg'
-          path += 'jpg'
+          'jpg'
         when 'image/png'
-          @art_type = 'png'
-          path += 'png'
+          'png'
         else
           puts "Invalid mime type: #{apic.mime_type}"
-          return nil
+          nil
       end
     end
+  end
 
-    puts "Saving art to path: #{path}"
-    fil = File.open(path, "wb")
-    fil.write(apic.picture)
-    fil.close
-
-    path
+  def save_art_to_path(path)
+    if @tag.frame_list('APIC').first
+      apic = @tag.frame_list('APIC').first
+      puts "Saving art to path: #{path}"
+      fil = File.open(path, "wb")
+      fil.write(apic.picture)
+      fil.close
+    end
   end
 
 end
