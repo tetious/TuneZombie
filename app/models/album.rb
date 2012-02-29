@@ -33,7 +33,7 @@ class Album < ActiveRecord::Base
   end
 
   def artist_name
-    self.tracks.first.artist.name
+    self.tracks.first.try_chain(:artist, :name)
   end
 
   def as_json(options={})
