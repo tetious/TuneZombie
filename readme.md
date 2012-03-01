@@ -11,16 +11,20 @@ It matters not, as we don't care. Reading runes would not be fair.
 Usage
 =====
 
-TuneZombie is not ready for "real" usage yet. However if you'd like to hack on it, by all means do so.
+TuneZombie is probably not ready for general usage yet, however Greg (tetious) is using it as his main library right now, so 
+it probably won't eat your tunes. Well, not permanently at least. 
+
+If you'd like to hack on it, by all means do so. If not, we'll have a proper preview release in the near future. 
 
 To get started, you'll want to add some music to the library. For now, this is a somewhat manual process.
 
 1. Add a user for yourself from the rails console. 
 2. Have a look at lib/tasks/db.rake for settings rows you'll need to add. We'll have a web UI to edit these soon.
-3. Run tz:crawl to import your music. It will make copies of your media files (for now), so make sure you have disk space.
+3. Make sure to add a user for yourself. (use the rails console to do this, for the moment)
+3. Run tz:crawl to import your music. It will make copies of your media files (unless you pass in move_files=true), so make sure you have disk space.
 
-If nothing went wrong, you should have a library to play with. Remember that many things aren't implemented, or are buggy. 
-Pull requests or patches are gladly accepted. Have fun! 
+If everything worked, you should have a library to play with. Remember that many things aren't implemented, or are buggy, or might cause zombies to 
+appear and eat your music. Pull requests or patches are gladly accepted. Have fun! 
 
 License
 =======
