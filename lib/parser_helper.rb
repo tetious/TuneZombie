@@ -16,6 +16,7 @@
 
 require 'uri'
 require 'helper_patches'
+require 'unicode_utils/nfc'
 
 class MusicLibrary
 
@@ -57,7 +58,7 @@ class MusicLibrary
   end
 
   def clean_filename(raw_filename)
-    URI.unescape(File.basename(raw_filename)).downcase.space_to_underscore
+    UnicodeUtils.nfc(URI.unescape(File.basename(raw_filename)).downcase.space_to_underscore)
   end
 
   private

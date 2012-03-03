@@ -54,10 +54,9 @@ class Crawler
         puts "CRAWL: Attempting to add file [#{fil}]"
         b_fil = ml.clean_filename(fil)
         # see if we can find track data for it
-        key = ml.library.keys.select { |f| f.start_with?(b_fil) }
+        matched_tracks = ml.library.select { |k,v| k.start_with?(b_fil) }.values
         tag = TagHelper.create(fil)
-        if key.count >= 1
-          matched_tracks = key.map { |k| ml.library[k] }
+        if matched_tracks.count >= 1
           library_track = matched_tracks.select { |t| t[:artist] == tag.artist and t[:album] == tag.album }
 
           if library_track.count == 1 # after limiting by artist and album, we have a match!
@@ -69,7 +68,7 @@ class Crawler
             puts "[#{b_fil}]: could not find in library after filtering."
             track = add_track_with_tag_data(fil, tag)
           end
-        elsif key.count == 0
+        elsif matched_tracks.count == 0
           puts "[#{b_fil}]: could not find in library."
           track = add_track_with_tag_data(fil, tag)
         end

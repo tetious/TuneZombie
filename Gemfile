@@ -57,3 +57,5 @@ end
 group :production do 
   gem 'therubyracer'
 end 
+
+gem 'unicode_utils'
