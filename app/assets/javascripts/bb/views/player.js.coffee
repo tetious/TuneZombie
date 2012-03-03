@@ -3,6 +3,7 @@ class App.Views.PlayerView extends Backbone.View
   initialize: ->
     @model.on('change', @updateTitleCard, this)
     @model.on('new_track', @play, this)
+    @volume = $.cookie('tz_volume') || 0.8
 
     $("#app-header").mouseenter @fadeInTitleCard
     $("#app-header").mouseleave @fadeOutTitleCard
@@ -15,6 +16,10 @@ class App.Views.PlayerView extends Backbone.View
       media: {mp3: ""}
       swfPath: "/assets"
       supplied: "mp3"
+      volume: @volume
+      volumechange: (e) =>
+        @volume = e.jPlayer.options.volume
+        $.cookie('tz_volume', @volume)
     )
 
   updateTitleCard: ->
@@ -48,6 +53,10 @@ class App.Views.PlayerView extends Backbone.View
       play: =>
         @trigger("playing")
 
+      volumechange: (e) =>
+        @volume = e.jPlayer.options.volume
+        $.cookie('tz_volume', @volume)
+
       timeupdate: (e) =>
         if e.jPlayer.status.currentTime == 0 and e.jPlayer.status.paused and @model.track.playing
           @trigger("stopped")
@@ -56,6 +65,7 @@ class App.Views.PlayerView extends Backbone.View
 
       swfPath: "/assets"
       solution: "flash, html"
+      volume: @volume
       supplied: @model.track.get("file_ext")
     )
 
