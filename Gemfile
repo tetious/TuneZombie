@@ -34,7 +34,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-gem "taglib-ruby"
+gem "ruby-mp3info"
 gem "mp4info", git: 'https://github.com/YenTheFirst/ruby-mp4info.git'
 gem "squeel"
 

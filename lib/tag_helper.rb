@@ -15,7 +15,7 @@
 #    along with TuneZombie.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'mp4info'
-require 'taglib'
+require 'mp3info'
 require 'chronic_duration'
 
 class TagM4a
@@ -104,23 +104,31 @@ class TagMp3
   end
 
   def load
-    @file = TagLib::MPEG::File.new(@filename)
-    @tag = @file.id3v2_tag
+    @file = Mp3Info.open(@filename)
+    @tag2 = @file.tag2
+    @tag = @file.tag
+
+    @apic = false
+    if @tag2['APIC'] 
+      @text_encoding, @mime_type, @picture_type, @description, @picture_data = @tag2['APIC'].unpack("c Z* c Z* a*")
+      @apic = true 
+    end 
+
     self
   end
 
   def disc # looks like this "1/5"
-    disc = @tag.frame_list('TPOS').first.to_s.split("/").first.to_i
+    disc = @tag2['TPOS'].to_s.split("/").first.to_i
     disc == 0 ? nil : disc
   end
 
   def composer
-    composer = @tag.frame_list('TCOM').first.to_s
+    composer = @tag2['TCOM'].to_s
     composer == "" ? nil : composer
   end
 
   def genre
-    @tag.genre == "" ? nil : @tag.genre
+    @tag.genre == "" ? nil : @tag.genre_s
   end
 
   def track
@@ -128,11 +136,11 @@ class TagMp3
   end
 
   def number
-    @tag.track == 0 ? nil : @tag.track
+    @tag.track == 0 ? nil : @tag.tracknum
   end
   
   def length
-    @file.audio_properties.length
+    @file.length
   end 
 
   def artist
@@ -144,29 +152,27 @@ class TagMp3
   end
 
   def art_type
-    if @tag.frame_list('APIC').first.nil?
-      puts "No APIC tag found."
-      nil
-    else
-      apic = @tag.frame_list('APIC').first
-      case apic.mime_type
+    if @apic
+      case @mime_type
         when 'image/jpeg', 'image/jpg'
           'jpg'
         when 'image/png'
           'png'
         else
-          puts "Invalid mime type: #{apic.mime_type}"
+          puts "Invalid mime type: #{@mime_type}"
           nil
       end
+    else
+      puts "No APIC tag found."
+      nil
     end
   end
 
   def save_art_to_path(path)
-    if @tag.frame_list('APIC').first
-      apic = @tag.frame_list('APIC').first
+    if @apic
       puts "Saving art to path: #{path}"
       fil = File.open(path, "wb")
-      fil.write(apic.picture)
+      fil.write @picture_data
       fil.close
     end
   end
