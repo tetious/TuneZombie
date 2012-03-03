@@ -25,7 +25,7 @@ class Crawler
     @path_to_search = options[:path_to_search]
     @dest_path = options[:dest_path]
     @itml_file = options[:itml_file]
-    @move_files = options[:move_files] || false
+    @move_files = options[:move_files]
 
     FileUtils.mkpath(File.join(@dest_path, '.__TZAlbumArt__'))
 
@@ -61,9 +61,10 @@ class Crawler
           library_track = matched_tracks.select { |t| t[:artist] == tag.artist and t[:album] == tag.album }
 
           if library_track.count == 1 # after limiting by artist and album, we have a match!
+            puts "[#{b_fil}]: found in iTunes library."
             track = add_track_with_itunes_data(fil, library_track.first)
           elsif library_track.count > 1 # after limiting, we still have more than one match.
-            puts "[#{b_fil}]: found #{library_track.count} times in iTunes library."
+            puts "[#{b_fil}]: found #{library_track.count} times in iTunes library. Skipping."
           elsif library_track.count == 0 # no matches after filtering
             puts "[#{b_fil}]: could not find in library after filtering."
             track = add_track_with_tag_data(fil, tag)
@@ -84,8 +85,6 @@ class Crawler
     else
       puts("CRAWL: Nothing to do.")
     end
-
-    # File.basename(file)
   end
 
   private
