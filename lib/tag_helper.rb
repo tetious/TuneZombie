@@ -53,7 +53,7 @@ class TagM4a
   end
 
   def track
-    @tag.NAM
+    @tag.NAM.force_encoding 'utf-8'
   end
 
   def length
@@ -61,11 +61,11 @@ class TagM4a
   end 
 
   def artist
-    @tag.ART
+    @tag.ART.force_encoding 'utf-8'
   end
 
   def album
-    @tag.ALB
+    @tag.ALB.force_encoding 'utf-8'
   end
 
   def art_type
