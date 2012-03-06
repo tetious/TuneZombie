@@ -57,7 +57,7 @@ class Crawler
         matched_tracks = ml.library.select { |k,v| k.start_with?(b_fil) }.values
         tag = TagHelper.create(fil)
         if matched_tracks.count >= 1
-          library_track = matched_tracks.select { |t| t[:artist] == tag.artist and t[:album] == tag.album }
+          library_track = matched_tracks.select { |t| t[:album] == tag.album }
 
           if library_track.count == 1 # after limiting by artist and album, we have a match!
             puts "[#{b_fil}]: found in iTunes library."
