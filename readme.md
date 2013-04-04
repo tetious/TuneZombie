@@ -20,7 +20,6 @@ To get started, you'll want to add some music to the library. For now, this is a
 
 1. Add a user for yourself from the rails console. 
 2. Have a look at lib/tasks/db.rake for settings rows you'll need to add. We'll have a web UI to edit these soon.
-3. Make sure to add a user for yourself. (use the rails console to do this, for the moment)
 3. Run tz:crawl to import your music. It will make copies of your media files (unless you pass in move_files=true), so make sure you have disk space.
 
 If everything worked, you should have a library to play with. Remember that many things aren't implemented, or are buggy, or might cause zombies to 
