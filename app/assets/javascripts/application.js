@@ -20,7 +20,6 @@
 //= require json2
 //= require backbone
 //= require backbone-query
-//= require bootstrap
 //= require app
 //= require_tree ../templates
 //= require_tree .

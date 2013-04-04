@@ -2,18 +2,18 @@
  * jPlayer Plugin for jQuery JavaScript Library
  * http://www.jplayer.org
  *
- * Copyright (c) 2009 - 2011 Happyworm Ltd
+ * Copyright (c) 2009 - 2012 Happyworm Ltd
  * Dual licensed under the MIT and GPL licenses.
  *  - http://www.opensource.org/licenses/mit-license.php
  *  - http://www.gnu.org/copyleft/gpl.html
  *
  * Author: Mark J Panaghiston
- * Version: 2.1.0
- * Date: 1st September 2011
+ * Version: 2.2.0
+ * Date: 13th September 2012
  */
 
 /* Code verified using http://www.jshint.com/ */
-/*jshint asi:false, bitwise:false, boss:false, browser:true, curly:true, debug:false, eqeqeq:true, eqnull:false, evil:false, forin:false, immed:false, jquery:true, laxbreak:false, newcap:true, noarg:true, noempty:true, nonew:true, nomem:false, onevar:false, passfail:false, plusplus:false, regexp:false, undef:true, sub:false, strict:false, white:false */
+/*jshint asi:false, bitwise:false, boss:false, browser:true, curly:true, debug:false, eqeqeq:true, eqnull:false, evil:false, forin:false, immed:false, jquery:true, laxbreak:false, newcap:true, noarg:true, noempty:true, nonew:true, onevar:false, passfail:false, plusplus:false, regexp:false, undef:true, sub:false, strict:false, white:false smarttabs:true */
 /*global jQuery:false, ActiveXObject:false, alert:false */
 
 (function($, undefined) {
@@ -237,8 +237,8 @@
 	$.jPlayer.prototype = {
 		count: 0, // Static Variable: Change it via prototype.
 		version: { // Static Object
-			script: "2.1.0",
-			needFlash: "2.1.0",
+			script: "2.2.0",
+			needFlash: "2.2.0",
 			flash: "unknown"
 		},
 		options: { // Instanced in $.jPlayer() constructor
@@ -423,6 +423,11 @@
 				flashCanPlay: true,
 				media: 'audio'
 			},
+			rtmpa: { // RTMP AUDIO
+				codec: 'audio/rtmp; codecs="rtmp"',
+				flashCanPlay: true,
+				media: 'audio'
+			},
 			m4v: { // H.264 / MP4
 				codec: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
 				flashCanPlay: true,
@@ -440,6 +445,11 @@
 			},
 			flv: { // FLV / F4V
 				codec: 'video/x-flv',
+				flashCanPlay: true,
+				media: 'video'
+			},
+			rtmpv: { // RTMP VIDEO
+				codec: 'video/rtmp; codecs="rtmp"',
 				flashCanPlay: true,
 				media: 'video'
 			}
@@ -682,7 +692,7 @@
 				// Code influenced by SWFObject 2.2: http://code.google.com/p/swfobject/
 				// Non IE browsers have an initial Flash size of 1 by 1 otherwise the wmode affected the Flash ready event. 
 
-				if($.browser.msie && Number($.browser.version) <= 8) {
+				if($.jPlayer.browser.msie && Number($.jPlayer.browser.version) <= 8) {
 					var objStr = '<object id="' + this.internal.flash.id + '" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="0" height="0"></object>';
 
 					var paramStr = [
@@ -891,7 +901,6 @@
 			}, false);
 			mediaElement.addEventListener("durationchange", function() {
 				if(entity.gate) {
-					self.status.duration = this.duration;
 					self._getHtmlStatus(mediaElement);
 					self._updateInterface();
 					self._trigger($.jPlayer.event.durationchange);
@@ -1002,16 +1011,19 @@
 			});
 		},
 		_getHtmlStatus: function(media, override) {
-			var ct = 0, d = 0, cpa = 0, sp = 0, cpr = 0;
+			var ct = 0, cpa = 0, sp = 0, cpr = 0;
 
-			if(media.duration) { // Fixes the duration bug in iOS, where the durationchange event occurs when media.duration is not always correct.
+			// Fixes the duration bug in iOS, where the durationchange event occurs when media.duration is not always correct.
+			// Fixes the initial duration bug in BB OS7, where the media.duration is infinity and displays as NaN:NaN due to Date() using inifity.
+			if(isFinite(media.duration)) {
 				this.status.duration = media.duration;
 			}
+
 			ct = media.currentTime;
 			cpa = (this.status.duration > 0) ? 100 * ct / this.status.duration : 0;
 			if((typeof media.seekable === "object") && (media.seekable.length > 0)) {
 				sp = (this.status.duration > 0) ? 100 * media.seekable.end(media.seekable.length-1) / this.status.duration : 100;
-				cpr = 100 * media.currentTime / media.seekable.end(media.seekable.length-1);
+				cpr = (this.status.duration > 0) ? 100 * media.currentTime / media.seekable.end(media.seekable.length-1) : 0; // Duration conditional for iOS duration bug. ie., seekable.end is a NaN in that case.
 			} else {
 				sp = 100;
 				cpr = cpa;
@@ -1387,7 +1399,7 @@
 				this._urlNotSetError("play");
 			}
 		},
-		videoPlay: function(e) { // Handles clicks on the play button over the video poster
+		videoPlay: function() { // Handles clicks on the play button over the video poster
 			this.play();
 		},
 		pause: function(time) {
@@ -1645,16 +1657,16 @@
 
 		// Plan to review the cssSelector method to cope with missing associated functions accordingly.
 
-		currentTime: function(e) { // Handles clicks on the text
+		currentTime: function() { // Handles clicks on the text
 			// Added to avoid errors using cssSelector system for the text
 		},
-		duration: function(e) { // Handles clicks on the text
+		duration: function() { // Handles clicks on the text
 			// Added to avoid errors using cssSelector system for the text
 		},
-		gui: function(e) { // Handles clicks on the gui
+		gui: function() { // Handles clicks on the gui
 			// Added to avoid errors using cssSelector system for the gui
 		},
-		noSolution: function(e) { // Handles clicks on the error message
+		noSolution: function() { // Handles clicks on the error message
 			// Added to avoid errors using cssSelector system for no-solution
 		},
 
@@ -2064,6 +2076,9 @@
 							case "mp3" :
 								self._getMovie().fl_setAudio_mp3(media[format]);
 								break;
+							case "rtmpa":
+								self._getMovie().fl_setAudio_rtmp(media[format]);
+								break;
 						}
 						self.status.src = media[format];
 						self.status.format[format] = true;
@@ -2089,6 +2104,9 @@
 							case "flv" :
 								self._getMovie().fl_setVideo_m4v(media[format]);
 								break;
+							case "rtmpv":
+								self._getMovie().fl_setVideo_rtmp(media[format]);
+								break;		
 						}
 						self.status.src = media[format];
 						self.status.format[format] = true;
@@ -2239,8 +2257,7 @@
 			alert("jPlayer " + this.version.script + " : id='" + this.internal.self.id +"' : " + message);
 		},
 		_emulateHtmlBridge: function() {
-			var self = this,
-			methods = $.jPlayer.emulateMethods;
+			var self = this;
 
 			// Emulate methods on jPlayer's DOM element.
 			$.each( $.jPlayer.emulateMethods.split(/\s+/g), function(i, name) {
