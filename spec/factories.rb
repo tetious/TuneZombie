@@ -25,6 +25,7 @@ FactoryGirl.define do
     artist
     album
     sequence(:number)
+    length 25
   end
 
 end

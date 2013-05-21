@@ -16,18 +16,16 @@
 
 class Track < ActiveRecord::Base
   belongs_to :artist
-  belongs_to :composer, :class_name => "Artist"
+  belongs_to :composer, :class_name => 'Artist'
   belongs_to :genre
   belongs_to :album
   has_many :track_plays, :dependent => :destroy
   has_one :track_metadata, :dependent => :destroy
   validates :name, :filename, :presence => true
 
-  default_scope lambda { includes(:track_metadata).where { track_metadata.user_id == User.current } }
-
   def file_path
 
-    "%s/%s/%s/%s" % [Settings.music_folder,
+    '%s/%s/%s/%s' % [Settings.music_folder,
                      self.artist.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
                      self.album.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
                      self.filename]
@@ -42,38 +40,13 @@ class Track < ActiveRecord::Base
     "#{number}. #{name}"
   end
 
-  def time
-    Time.at(length).strftime("%M:%S")
-  end
-
-  def rating
-    track_metadata.rating
-  end
-
-  def rating=(value)
-    track_metadata.rating = value
-    track_metadata.save
-  end
-
-  def album_name
-    album.name
-  end
-
-  def artist_name
-    artist.name
-  end
-
   def mime_type
-    mime_types = {m4a: "audio/mp4a-latm", mp3: "audio/mpeg"}
+    mime_types = {m4a: 'audio/mp4a-latm', mp3: 'audio/mpeg'}
     mime_types[file_ext.to_sym]
   end
 
   def file_ext
     File.extname(filename)[1,3]
-  end
-
-  def as_json(options={})
-    super(options.merge(methods: [:file_ext, :rating, :time], includes: [:track_metadata]))
   end
 
   def self.track_from_file(fil)
@@ -84,7 +57,7 @@ class Track < ActiveRecord::Base
   def self.hash_file(file_name)
     file_h = Digest::SHA2.new
     File.open(file_name, 'r') do |fh|
-      while buffer = fh.read(1024)
+      while (buffer = fh.read(1024))
         file_h << buffer
       end
     end
