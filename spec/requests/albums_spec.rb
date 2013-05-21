@@ -1,11 +1,14 @@
 require 'spec_helper'
 
-describe "Albums" do
-  describe "GET /albums" do
-    #it "works! (now write some real specs)" do
-    #  # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-    #  get albums_path
-    #  response.status.should be(200)
-    #end
+describe 'Albums' do
+  describe 'GET /albums' do
+
+    it 'lists albums' do
+      FactoryGirl.create_list(:album_with_tracks, 5)
+      get albums_path, format: 'json'
+      response.status.should be(200)
+      JSON.parse(response.body).length.should be(5)
+    end
+
   end
 end
