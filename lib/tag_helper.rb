@@ -140,7 +140,7 @@ class TagMp3
   end
   
   def length
-    @file.length
+    @file.length.round
   end 
 
   def artist
