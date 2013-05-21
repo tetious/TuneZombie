@@ -15,6 +15,11 @@ FactoryGirl.define do
 
   end
 
+  factory :user do
+    name 'test_user'
+    password 'password'
+  end
+
   factory :artist do
     name 'Test Artist'
   end

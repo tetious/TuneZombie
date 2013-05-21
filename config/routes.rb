@@ -12,9 +12,7 @@ TuneZombie::Application.routes.draw do
   resources :track_plays
   resources :album_art
   resources :users
-
-  match 'music/' => "music#index"
-  match 'music/*specs' => "music#index"
+  resources :music
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
