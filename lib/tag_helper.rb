@@ -53,7 +53,7 @@ class TagM4a
   end
 
   def track
-    @tag.NAM.force_encoding 'utf-8'
+    @tag.NAM.try(:force_encoding, 'utf-8')
   end
 
   def length
@@ -61,11 +61,11 @@ class TagM4a
   end 
 
   def artist
-    @tag.ART.force_encoding 'utf-8'
+    @tag.ART.try(:force_encoding, 'utf-8')
   end
 
   def album
-    @tag.ALB.force_encoding 'utf-8'
+    @tag.ALB.try(:force_encoding, 'utf-8')
   end
 
   def art_type
@@ -124,15 +124,15 @@ class TagMp3
 
   def composer
     composer = @tag2['TCM'].to_s
-    composer == "" ? nil : composer
+    composer.empty? ? nil : composer
   end
 
   def genre
-    @tag.genre == "" ? nil : @tag.genre_s
+    @tag.empty? ? nil : @tag.genre_s
   end
 
   def track
-    @tag.title == "" ? nil : @tag.title
+    @tag.empty? ? nil : @tag.title
   end
 
   def number
