@@ -5,6 +5,9 @@ TuneZombie::Application.routes.draw do
   resources :genres
   resources :artists
   resources :albums
+  resources :albums do
+    resources :tracks, only: [:index]
+  end
   resources :tracks
   resources :track_plays
   resources :album_art

@@ -2,7 +2,11 @@ class TracksController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Track.order("name")
+    if params[:album_id]
+      respond_with Album.find(params[:album_id]).tracks.order(:name)
+    else
+      respond_with Track.order("name")
+    end
   end
 
   def show
