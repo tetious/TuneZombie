@@ -109,8 +109,8 @@ class TagMp3
     @tag = @file.tag
 
     @apic = false
-    if @tag2['APIC'] 
-      @text_encoding, @mime_type, @picture_type, @description, @picture_data = @tag2['APIC'].unpack("c Z* c Z* a*")
+    if @tag2['PIC'] 
+      @text_encoding, @mime_type, @picture_type, @description, @picture_data = @tag2['PIC'].unpack("c Z* c Z* a*")
       @apic = true 
     end 
 
