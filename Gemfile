@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem "active_model_serializers", "~> 0.8.0"
 
 gem 'sqlite3'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
