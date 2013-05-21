@@ -35,17 +35,4 @@ class Album < ActiveRecord::Base
   def artist_name
     self.tracks.first.try_chain(:artist, :name)
   end
-
-  def as_json(options={})
-    super(options.merge(:include => {
-      :tracks => { 
-        :methods => [:rating, :file_ext, :time], 
-        :only => [:id, :name, :number, :disc, :album_id, :track_id]
-        }
-      },
-      :methods => :artist_name,
-      :only => [:id, :name]
-      )
-    )
-  end
 end
