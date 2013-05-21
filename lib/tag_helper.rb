@@ -118,7 +118,7 @@ class TagMp3
   end
 
   def disc # looks like this "1/5"
-    disc = @tag2['TPOS'].to_s.split("/").first.to_i
+    disc = @tag2['TPA'].to_s.split("/").first.to_i
     disc == 0 ? nil : disc
   end
 
