@@ -207,7 +207,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.0)
   eco (~> 1.0.0)
   ejs (~> 1.0.0)
-  factory_girl_rails
+  factory_girl_rails (~> 4.0)
   guard-rspec
   jasminerice
   jquery-rails
