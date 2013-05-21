@@ -123,7 +123,7 @@ class TagMp3
   end
 
   def composer
-    composer = @tag2['TCOM'].to_s
+    composer = @tag2['TCM'].to_s
     composer == "" ? nil : composer
   end
 
