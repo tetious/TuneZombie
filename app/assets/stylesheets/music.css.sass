@@ -42,21 +42,40 @@ $container: #646464
 .album_box
   width: 95%
 
+.album-box-grid
+  list-style: none
+  margin: 0 auto
+  text-align: center
+  width: 100%
+  li
+    display: inline-block
+    margin: 10px 5px 0 5px
+    vertical-align: top
+    height: 220px
+
+.album-box-details
+  color: white
+  font-size: 12pt
+  font-weight: bold
+  padding: 10px
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  width: 180px
+
 .album-box-details-artist
   color: #BBD9EE
   font-size: 10pt
-  margin-left: 0.5em
 
 .album-box-details-name
   color: #EBF4FA
 
-.album_art
+.album-art
   width: 150px
   border-style: solid
   border-width: 5px
   border-color: #101010
   border-radius: 4px
-  margin-top: 40px
 
 .album_box_art
   float: left
@@ -84,12 +103,6 @@ $container: #646464
   tr:nth-child(odd)
     background-color: #555
 
-.album_box_details
-  color: white
-  font-size: 12pt
-  font-weight: bold
-  padding: 10px
-
 .item-list
   @include unselectable
   margin: 0px
@@ -101,9 +114,6 @@ $container: #646464
     list-style-type: none
   li:nth-child(odd)
     background-color: #555
-
-.track-list-item
-
 
 .row_selected
   background-color: #003366

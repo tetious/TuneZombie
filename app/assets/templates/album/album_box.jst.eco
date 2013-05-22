@@ -1,22 +1,9 @@
-<tr>
-  <td class="album_box_art">
-    <img class="album_art" src="album_art/<%= @album.id %>" />
-  </td>
-  <td class="album-box-wrapper-cell">
-    <table class="album_box">
-      <tr>
-        <td>
-          <div class="album_box_details">
-            <span class="album-box-details-name"><%= @album.name %></span> </br> 
-            <span class="album-box-details-artist"><%= @album.artist_name %></span>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span id="album-block-tracks"></span>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
+<li>
+  <a href="#">
+    <img class="album-art" src="album_art/<%= @album.id %>"/>
+  </a>
+  <div class="album-box-details">
+    <span class="album-box-details-name"><%= @album.name %></span> </br>
+    <span class="album-box-details-artist"><%= @album.artist_name %></span>
+  </div>
+</li>

@@ -1,5 +1,4 @@
 class App.Views.AlbumBoxList extends Backbone.View
-
   initialize: ->
     @collection.on('reset', @render, this)
     @collection.on('add', @appendItem, this)
@@ -15,8 +14,7 @@ class App.Views.AlbumBoxList extends Backbone.View
 
 class App.Views.AlbumBox extends Backbone.View
   template: JST["album/album_box"]
-  tagName: 'table'
-  className: "album-box-wrapper"
+  tagName: 'li'
 
   initialize: ->
     #@model.tracks.on('reset', @renderTracks, this)
