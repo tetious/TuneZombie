@@ -1,4 +1,4 @@
-TuneZombie
+TuneZombie [![Code Climate](https://codeclimate.com/github/tetious/TuneZombie.png)](https://codeclimate.com/github/tetious/TuneZombie)
 ==========
 
 TuneZombie is a open source Ruby on Rails based music server.
