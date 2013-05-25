@@ -9,7 +9,12 @@ FactoryGirl.define do
       end
 
       after(:create) do |album, evaluator|
-        FactoryGirl.create_list(:track, evaluator.track_count, album: album)
+        user = User.first || FactoryGirl.create(:user)
+
+        evaluator.track_count.times do
+          track = FactoryGirl.create :track, album: album
+          FactoryGirl.create :track_metadata, track: track, user: user
+        end
       end
     end
 
@@ -32,6 +37,12 @@ FactoryGirl.define do
     album
     sequence(:number)
     length 25
+  end
+
+  factory :track_metadata do
+    track
+    user
+    rating 1
   end
 
 end

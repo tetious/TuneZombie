@@ -20,7 +20,7 @@ class Track < ActiveRecord::Base
   belongs_to :genre
   belongs_to :album
   has_many :track_plays, :dependent => :destroy
-  has_one :track_metadata, :dependent => :destroy
+  has_many :track_metadatas, :dependent => :destroy
   validates :name, :filename, :presence => true
 
   def file_path
@@ -30,6 +30,10 @@ class Track < ActiveRecord::Base
                      self.album.try_chain(:name, :space_to_underscore, :sanitize_for_filename) || '__nil__',
                      self.filename]
 
+  end
+
+  def rating
+    track_metadata.try(:rating)
   end
 
   def file_size
@@ -63,5 +67,12 @@ class Track < ActiveRecord::Base
     end
     file_h.to_s
   end
+
+  private
+    def track_metadata
+      if User.current
+        track_metadatas.where(user_id: User.current).first
+      end
+    end
 
 end

@@ -29,6 +29,16 @@ describe 'Albums' do
       expect(JSON.parse(response.body).length).to eq(10)
     end
 
+    describe 'when authenticated' do
+      it 'lists tracks for an album with ratings' do
+        FactoryGirl.create(:user)
+        get user_path(1)
+
+        get album_tracks_path(1), format: 'json'
+        expect(JSON.parse(response.body).first['rating']).to eq(1)
+      end
+    end
+
   end
 
 end
