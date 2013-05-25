@@ -16,6 +16,7 @@
 //= require jquery.multi-accordion
 //= require jquery.layout
 //= require jquery.cookie
+//= require modernizr
 //= require underscore
 //= require json2
 //= require backbone
