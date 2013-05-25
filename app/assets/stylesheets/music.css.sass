@@ -49,33 +49,65 @@ $container: #646464
   width: 100%
   li
     display: inline-block
-    margin: 10px 5px 0 5px
+    padding: 0 10px
     vertical-align: top
-    height: 220px
+    height: 210px
+    width: 150px
+    a, img
+      display: block
+      position: relative
+  li.ab-expanded > a::after
+    top: auto
+    border: solid transparent
+    content: " "
+    height: 0
+    width: 0
+    position: absolute
+    pointer-events: none
+    border-bottom-color: #ddd
+    border-width: 15px
+    left: 50%
+    margin: 20px 0 0 -10px
 
 .album-box-details
   color: white
-  font-size: 12pt
+  font-size: 10pt
+  padding: 5px 5px
   font-weight: bold
-  padding: 10px
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
-  width: 180px
+  width: 150px
 
 .album-box-details-artist
   color: #BBD9EE
-  font-size: 10pt
+  font-size: 8pt
 
 .album-box-details-name
   color: #EBF4FA
 
 .album-art
   width: 150px
+  height: 150px
   border-style: solid
   border-width: 5px
   border-color: #101010
   border-radius: 4px
+
+#track-list-expando
+  position: absolute
+  background: #ddd
+  top: auto
+  left: 0
+  width: 100%
+  margin-top: 10px
+  text-align: left
+  height: 0
+  overflow: hidden
+
+#track-list-expando-inner
+  padding: 50px 30px
+  height: 100%
 
 .album_box_art
   float: left

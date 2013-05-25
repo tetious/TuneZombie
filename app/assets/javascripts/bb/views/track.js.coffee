@@ -15,10 +15,15 @@ class App.Views.AlbumBoxList extends Backbone.View
 class App.Views.AlbumBox extends Backbone.View
   template: JST["album/album_box"]
   tagName: 'li'
+  id: => 'album-box-' + @model.get('id')
+  events:
+    'click': 'showTrackBox'
 
   initialize: ->
     #@model.tracks.on('reset', @renderTracks, this)
     @model.on('change', @renderBox, this)
+
+  showTrackBox: =>
 
   renderBox: =>
     $(@el).html(@template(album: @model.toJSON()))
@@ -31,7 +36,6 @@ class App.Views.AlbumBox extends Backbone.View
 
   render: ->
     @renderBox()
-    @renderTracks()
     this
 
 class App.Views.TrackList extends Backbone.View

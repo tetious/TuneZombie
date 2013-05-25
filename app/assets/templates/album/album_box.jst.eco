@@ -1,9 +1,7 @@
-<li>
-  <a href="#">
-    <img class="album-art" src="album_art/<%= @album.id %>"/>
-  </a>
-  <div class="album-box-details">
-    <span class="album-box-details-name"><%= @album.name %></span> </br>
-    <span class="album-box-details-artist"><%= @album.artist_name %></span>
-  </div>
-</li>
+<a href="#">
+  <img class="album-art" src="album_art/<%= @album.id %>"/>
+</a>
+<div class="album-box-details">
+  <span class="album-box-details-name"><%= @album.name %></span> </br>
+  <span class="album-box-details-artist"><%= @album.artist_name %></span>
+</div>
