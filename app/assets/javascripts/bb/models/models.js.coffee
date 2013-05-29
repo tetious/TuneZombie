@@ -1,8 +1,3 @@
-class App.Models.Album extends Backbone.Model
-  initialize: ->
-    @tracks = new App.Models.Tracks()
-    @tracks.reset(@get("tracks"))
-
 class App.Models.Albums extends Backbone.QueryCollection
   url: '/albums'
   model: App.Models.Album

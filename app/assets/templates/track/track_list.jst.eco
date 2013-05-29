@@ -1,2 +1,4 @@
 <a id="track-list-close" href="#"><i class="icon-remove-circle"></i></a>
-<div id="track-list-expando-inner">hi</div>
+<div id="track-list-wrapper">
+  <ul id="track-list-inner"></ul>
+</div>

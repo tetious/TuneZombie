@@ -1,18 +1,18 @@
 class App.PlayerPlaylist
 
   useCollection: (collection) ->
-    if @collection 
-      @collection.off("reset", @loadCollection)
-    @collection = collection
-    @collection.on("reset", @loadCollection, this)
+    # if @collection 
+    #   @collection.off("reset", @loadCollection)
+    # @collection = collection
+    # @collection.on("reset", @loadCollection, this)
 
   loadCollection: ->
-    @tracks = []
-    @trackCollection = new App.Models.Tracks
-    for item in @collection.models
-      for track in item.tracks.models
-        @tracks.push(track.id)  
-        @trackCollection.add(track)
+    # @tracks = []
+    # @trackCollection = new App.Models.Tracks
+    # for item in @collection.models
+    #   for track in item.tracks.models
+    #     @tracks.push(track.id)  
+    #     @trackCollection.add(track)
 
   prev: (id) -> 
    idx = @tracks.indexOf(id) - 1

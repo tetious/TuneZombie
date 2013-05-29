@@ -94,7 +94,7 @@ $container: #646464
   border-color: #101010
   border-radius: 4px
 
-#track-list-expando
+#track-list
   position: absolute
   background: #ddd
   top: auto
@@ -105,9 +105,39 @@ $container: #646464
   height: 0
   overflow: hidden
 
-#track-list-expando-inner
+#track-list-wrapper
   padding: 50px 30px
-  height: 100%
+  -moz-column-count: 2
+  -moz-column-gap: 20px
+  -webkit-column-count: 2
+  -webkit-column-gap: 20px
+  column-count: 2
+  column-gap: 20px
+  li
+    height: 25px
+    width: 100%
+
+.track-list-item
+  height: 2em
+  vertical-align: middle
+  white-space: nowrap
+  div
+    display: inline-block
+
+.track_num
+  width: 2em
+
+.track_name
+  min-width: 25em
+  width: 60%
+
+.track_time
+  width: 5em
+
+.track_rating
+  padding: 0 1em
+  width: 100px
+  display: inline
 
 #track-list-close
   position: absolute
@@ -161,25 +191,11 @@ $container: #646464
   background-color: #444 !important
   color: #7fffd4 !important
 
-.track_num
-  width: 2em
-  text-align: right
-
-.track_name
-  width: 35em
-
-.track_time
-  width: 5em
-
-.track_rating
-  width: 75px
-
-
 html, body
   height: 100%
   margin: 0
-  overflow: hidden
   padding: 0
+  min-width: 1200px
 
 #app
   height: 100%

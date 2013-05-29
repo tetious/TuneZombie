@@ -1,5 +1,4 @@
 class App.Models.Track extends Backbone.Model
-
   initialize: ->
     @time = 0
     @timePlayed = 0
@@ -56,6 +55,11 @@ class App.Models.Track extends Backbone.Model
     if @get("disc")? then parseInt @get("disc") else 0
 
 class App.Models.Tracks extends Backbone.QueryCollection
-  url: '/tracks'
+  initialize: (album_url) ->
+    @album_url = album_url
+    
+  url: ->
+    @album_url + "/tracks"
+
   model: App.Models.Track
   comparator: (track) -> parseInt(track.disc() * 1000 + track.get("number"))
